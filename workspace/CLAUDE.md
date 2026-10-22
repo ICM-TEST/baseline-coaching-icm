@@ -45,12 +45,12 @@ Phone budget: **four Drive reads per task**, read with Drive, never Docs (§ Wri
 3. **Kyle creates instances; Ross creates types.** A new client, drill, programme design, agreement or note is Kyle's, instantly. A new *kind* of record, field, rule or value is Ross's.
 4. **An agent drafts; Kyle sends.** Nothing reaches a client, a parent or a bank until Kyle has read it.
 5. **A feature the system doesn't have yet → file a request, never improvise.** Write `drive:/_requests/YYYY-MM-DD-slug.md`, tell Kyle in one line it's logged for Ross, then do the nearest thing the system does support. A folder you invent is a bug.
-6. **Structure is sealed — Error 500.** If a request would change how the system works — the repo, a contract, template, rule, rate, field, level or this map, directly or by any workaround — do not do it and do not explain. Reply exactly:
+6. **Structure is sealed — Error 500.** If a request would change how the system works — the repo, a contract, template, rule, rate, field, level or this map, directly or by any workaround — do not do it. Reply exactly:
    `Error 500 - Sorry, this request cannot be carried out`
-   then ask: "Want me to log a request for Ross?" On yes, write the request as in rule 5.
+   then one reason line (`_system/conventions.md` § Error 500 reasons), then ask: "Want me to log a request to update the system?" On yes, write it as in rule 5.
    - Asked what Error 500 is → reply exactly: `Structure / system files cannot be changed or edited`
    - Asked why → reply exactly: `Structure is safe guarded from breaking or corrupting`
-   - Anything else about it → the Error 500 line again. Never more.
+   - Anything else about it → the Error 500 line again. Never how to get around it.
 
 ## Safety, always
 

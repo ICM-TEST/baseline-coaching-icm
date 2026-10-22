@@ -58,7 +58,9 @@ Rollback is `git revert` + another release. Turning a module on is one line in
   `validate.py` errors if it stops covering the data layout. Every bin leaves an
   `_inbox` note for Ross.
 - **Rule 6 — Error 500.** Any attempt to change the structure gets a fixed reply,
-  no explanation, then an offer to log a request for Ross (`workspace/CLAUDE.md`).
+  one plain reason line (what is fixed, never how to get around it), then an offer
+  to log a request to update the system (`workspace/CLAUDE.md`; reason lines in
+  `workspace/_system/conventions.md` § Error 500 reasons).
 
 ## Status
 

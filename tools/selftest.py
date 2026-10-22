@@ -155,7 +155,18 @@ def _():
     text = (WS / "CLAUDE.md").read_text()
     for line in ERROR_500:
         assert f"`{line}`" in text, f"missing or reworded in CLAUDE.md: {line}"
-    assert "Want me to log a request for Ross?" in text
+    assert "Want me to log a request to update the system?" in text
+    assert "§ Error 500 reasons" in text, "rule 6 must point to the reason lines"
+
+
+@case("rule 6: reason lines live in conventions, one row per kind, never name Ross")
+def _():
+    text = (WS / "_system" / "conventions.md").read_text()
+    assert "## Error 500 reasons" in text, "conventions.md has no § Error 500 reasons"
+    section = text.split("## Error 500 reasons", 1)[1].split("\n## ", 1)[0]
+    rows = [l for l in section.splitlines() if l.startswith("| ") and not l.startswith("| Kyle")]
+    assert len(rows) >= 3, f"expected a reason row per kind, found {len(rows)}"
+    assert "Ross" not in section, "a reason line must not say who set it"
 
 
 @case("rule 6: the replies have one home — no other structure file restates them")

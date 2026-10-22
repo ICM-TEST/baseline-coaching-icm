@@ -138,6 +138,22 @@ this list covers the whole data folder layout.
 Not critical: `drive:/_index/` and `drive:/FILE-MAP.md` (Ross's tools rebuild them),
 a single library file, a court sheet, a brief or a draft.
 
+## Error 500 reasons ◆
+
+The one line that follows the Error 500 line (`CLAUDE.md` rule 6). It says what is
+fixed, in Kyle's words — never who fixed it, never how to get around it. Pick the
+row that fits; fill the angle brackets.
+
+| Kyle tries to… | Reason line |
+|---|---|
+| set a field to a value that isn't allowed — a level, a court, a status | "<what he said>" isn't one of the <field>s the system is set up with: <every allowed value>. |
+| change a rate, the cancellation policy, his hours, a court's details or his voice | Your <thing> is part of how the system is set up. |
+| add a field or a new kind of record, or change a template, contract, rule or this map | That would change how the system is built. |
+
+Allowed values come from where `_system/schema.md` says the field's list lives
+(levels: `_shared/curriculum.md`; courts: `_shared/coach.md`). List them all, in the
+order written there, joined with commas and a final "or".
+
 ## CONTEXT.md contract
 
 Every folder-level `CONTEXT.md` carries six things: **Purpose** (opening paragraph),
