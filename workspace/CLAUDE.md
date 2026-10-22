@@ -36,7 +36,7 @@ Every other path is in Structure. Never write a structure file into Drive.
 
 Session notes, programmes, money and reviews are switched off (`_system/modules.yml`) — rule 5.
 Read this map, one `CONTEXT.md` and the files it names; never walk the tree.
-Phone budget: **four Drive reads per task.** Structure reads are free.
+Phone budget: **four Drive reads per task**, read with Drive, never Docs (§ Writing to Drive). Structure reads are free.
 
 ## The six rules — no reasoning past these
 

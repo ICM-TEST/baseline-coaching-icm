@@ -66,14 +66,21 @@ is, because the agent cannot open it later.
 Kyle's phone can edit a Google Doc but not a plain file. So every file you write in
 `drive:/` is a **Google Doc**, and you change it with the Google Docs connector.
 
+- **Read with Drive, write with Docs.** Read any file with the Google Drive
+  connector — it returns the plain text. Never read with the Docs connector: it
+  returns every style as well and costs about 30 times as much. Docs is only for
+  changing a Doc.
+- **Search** with content previews off: find a client by folder name, a file by
+  title. Open the one file you need.
 - **Create:** a Doc titled with the full filename, `.md` included — `log.md`,
   `2026-10-23-1700.md`. Upload the text as **plain text**; Drive turns it into a Doc
   word for word. Never upload it as markdown — Drive reformats it and the `---`
   frontmatter is lost.
 - **Add an entry** (a log line, an incident addendum): insert it at the end of the
-  Doc. Nothing above it moves.
-- **Change a field:** read the Doc, then replace that one whole line —
-  `status: trial` → `status: active`. One field per replace.
+  Doc. No read needed. Nothing above it moves.
+- **Change a field:** read the file with Drive for the exact current line, then
+  replace that one whole line with Docs — `status: trial` → `status: active`. One
+  field per replace.
 - **Never** rewrite a whole Doc, and never retitle, move or delete one to change it.
 - Ross's tools write `drive:/_index/`, `drive:/FILE-MAP.md` and `drive:/_release.md`
   as plain files. Read them; never write them.

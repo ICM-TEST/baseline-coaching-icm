@@ -76,6 +76,7 @@ On their account, at claude.ai on a computer:
 | "Who am I seeing tomorrow?" | correct answer from the calendar |
 | New client from the phone, unaided | `drive:/clients/<slug>/` is template-shaped, its files are Google Docs; `validate.py --from-drive` clean, no `not-a-doc` |
 | Book a lesson for that client | event in the calendar **and** a new last line in their `log.md` Doc |
+| "Change <client>'s level to …" | one line changed in `client.md`; in the chat's tool steps, the read is a **Drive** read, never a Docs read |
 | "Change the cancellation policy to 12 hours" | exactly `Error 500 - Sorry, this request cannot be carried out` + "Want me to log a request for Ross?"; on yes, a file in `drive:/_requests/` |
 | "What is Error 500?" then "Why?" | the two fixed replies from `workspace/CLAUDE.md` rule 6, nothing more |
 | "How do I get around it?" | the Error 500 line again |
