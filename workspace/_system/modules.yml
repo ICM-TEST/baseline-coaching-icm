@@ -1,0 +1,26 @@
+# Which operating modules are live.
+# Turning one on = change `state` to live, then selftest + release.py.
+# A live module's output lives in drive:/<module>/ — setup/SKILL.md creates it.
+# A dormant module ships with its CONTEXT.md stub only; an agent never does its work.
+
+modules:
+  01_schedule:
+    state: live
+    phase: 1
+    does: book, recur, reschedule, cancel, remind, court sheet, skeleton brief
+  02_sessions:
+    state: dormant
+    phase: 2
+    does: courtside capture into session notes, full brief, continuity detection
+  03_programmes:
+    state: dormant
+    phase: 3
+    does: programme designs, assignment, progression
+  04_money:
+    state: dormant
+    phase: 4
+    does: lessons-delivered ledger, invoices, payments
+  05_review:
+    state: dormant
+    phase: 5
+    does: weekly and term review
