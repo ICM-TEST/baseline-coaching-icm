@@ -90,7 +90,7 @@ def build_open_items(r) -> str:
 
     open_req = [q for q in r.requests if q.get("status") in ("open", "answered")]
     if open_req:
-        body = "".join(f"- [{Path(q['_path']).stem}](../{q['_path']}) — {q['status']}\n" for q in open_req)
+        body = "".join(f"- [{Path(q['_path']).stem}](../{q['_path']}) — {'note, ' if q.get('kind') == 'note' else ''}{q['status']}\n" for q in open_req)
         sections.append(("Requests to Ross", body))
 
     setup = [f for f in r.findings if f.code == "setup"]

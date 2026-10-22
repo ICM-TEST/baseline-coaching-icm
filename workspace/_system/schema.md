@@ -93,16 +93,23 @@ No template file; the shape is fixed here:
 ```
 ---
 date: YYYY-MM-DD
+kind: request       # request · note
 status: open        # open · answered · done · declined
 ---
 ## Kyle asked for
-## What he was trying to do
+## Example
+## How urgent, and meanwhile
 ## What the system did instead
 ## Ross's answer
 ```
 
-Kyle's agent writes the first three sections and nothing else. Ross writes the answer
-and the status.
+A note (`kind: note`, file `YYYY-MM-DD-note-<slug>.md`) has only `## Note` and
+`## Ross's answer`.
+
+Kyle's agent writes every section except `## Ross's answer`, asking first as in
+`_system/conventions.md` § Requests. Ross writes the answer and the status. An older
+request with `## What he was trying to do` and no `kind:` is still valid; `kind`
+defaults to `request`.
 
 ## Release marker — `drive:/_release.md`
 

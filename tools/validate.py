@@ -67,7 +67,7 @@ VOCAB = {
     },
     "programme-assignment": {"status": {"active", "paused", "completed", "abandoned"}},
     "programme-design": {"status": {"active", "draft", "retired"}},
-    "request": {"status": {"open", "answered", "done", "declined"}},
+    "request": {"status": {"open", "answered", "done", "declined"}, "kind": {"request", "note"}},
     "message": {"status": {"draft", "sent"}},
 }
 DERIVED_FIELDS = {"last-session", "next-session", "lessons-owed", "balance"}
@@ -465,6 +465,7 @@ def check_requests(r: Report):
         vocab_check(r, "request", fm, rp)
         fm["_path"] = rp
         fm.setdefault("status", "open")
+        fm.setdefault("kind", "request")
         r.requests.append(fm)
 
 

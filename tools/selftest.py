@@ -271,6 +271,41 @@ def _():
     assert "2026-10-10-group-bookings" in indexes.build(d, s)["_index/open-items.md"]
 
 
+@case("a note for Ross appears in open-items, marked as a note")
+def _():
+    s, d = roots()
+    items = indexes.build(d, s)["_index/open-items.md"]
+    assert "2026-10-12-note-court-keys](" in items and "— note, open" in items, items
+
+
+@case("request without kind: (older shape) is still valid and counts as a request")
+def _():
+    s, d = roots()
+    r = run(s, d)
+    old = next(q for q in r.requests if "group-bookings" in q["_path"])
+    assert old["kind"] == "request" and r.ok, errors(r)
+
+
+@case("vocab: request kind outside request/note is an error")
+def _():
+    s, d = roots()
+    set_field(d / "_requests" / "2026-10-12-note-court-keys.md", "kind", "memo")
+    assert "vocab" in codes(run(s, d))
+
+
+@case("rule 5: asks the three questions from conventions, word for word, before logging")
+def _():
+    rule5 = next(l for l in (WS / "CLAUDE.md").read_text().splitlines() if l.startswith("5. "))
+    assert "§ Requests" in rule5 and "Send Ross a note" in rule5
+    text = (WS / "_system" / "conventions.md").read_text()
+    section = text.split("## Requests", 1)[1].split("\n## ", 1)[0]
+    for q in ("1. What should the system do?",
+              "2. Give me one real example — who, when, what happened.",
+              "3. How urgent is it, and what will you do until then?"):
+        assert q in section, f"missing or reworded: {q}"
+    assert "Ask once" in section and "kind: note" in section
+
+
 @case("roster never carries phone numbers or medical details")
 def _():
     s, d = roots()

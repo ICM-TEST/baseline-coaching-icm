@@ -138,6 +138,28 @@ this list covers the whole data folder layout.
 Not critical: `drive:/_index/` and `drive:/FILE-MAP.md` (Ross's tools rebuild them),
 a single library file, a court sheet, a brief or a draft.
 
+## Requests ◆
+
+How `CLAUDE.md` rule 5, or a "yes" after Error 500, becomes a file in
+`drive:/_requests/`. The file's shape is in `_system/schema.md` § Request.
+
+**Before you write, ask** — in one message, numbered, in these words, leaving out any
+the chat has already answered:
+
+1. What should the system do?
+2. Give me one real example — who, when, what happened.
+3. How urgent is it, and what will you do until then?
+
+- Ask once. Anything Kyle doesn't answer goes in as `(not said)`; never ask again.
+  "Just log it" → log it with what you have.
+- His answers go in word for word, each under its own heading. Don't summarise.
+- Then one line to Kyle that it's logged for Ross.
+
+**A note for Ross** — "send Ross a note", "tell Ross …": no questions. Write
+`drive:/_requests/YYYY-MM-DD-note-<slug>.md` with `kind: note` and his words, word
+for word, under `## Note`; tell him in one line it's with Ross. Writing a note
+changes nothing else.
+
 ## Error 500 reasons ◆
 
 The one line that follows the Error 500 line (`CLAUDE.md` rule 6). It says what is

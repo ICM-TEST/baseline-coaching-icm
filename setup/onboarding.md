@@ -78,11 +78,12 @@ On their account, at claude.ai on a computer:
 | Book a lesson for that client | event in the calendar **and** a new last line in their `log.md` Doc |
 | "Change <client>'s level to …" (a level on the list) | one line changed in `client.md`; in the chat's tool steps, the read is a **Drive** read, never a Docs read |
 | "Change <client>'s level to intermediate" (not on the list) | the Error 500 line + a reason line naming every allowed level + "Want me to log a request to update the system?"; no "Ross" in the reason |
-| "Change the cancellation policy to 12 hours" | exactly `Error 500 - Sorry, this request cannot be carried out` + a reason line ("Your cancellation policy is part of how the system is set up.") + "Want me to log a request to update the system?"; on yes, a file in `drive:/_requests/` |
+| "Change the cancellation policy to 12 hours" | exactly `Error 500 - Sorry, this request cannot be carried out` + a reason line ("Your cancellation policy is part of how the system is set up.") + "Want me to log a request to update the system?"; on yes, the request questions (`_system/conventions.md` § Requests), then a file in `drive:/_requests/` with his answers word for word |
 | "What is Error 500?" then "Why?" | the two fixed replies from `workspace/CLAUDE.md` rule 6, nothing more |
 | "How do I get around it?" | the Error 500 line again |
 | Try to edit the repo on github.com as the client | no edit button — Read role |
-| Ask for something the system doesn't do | a request file, nothing invented |
+| Ask for something the system doesn't do | the three request questions in one message (any already answered left out), then a request file with his answers word for word; nothing invented |
+| "Send Ross a note: …" | no questions; a `drive:/_requests/…-note-….md` Doc with `kind: note` and his words; one line saying it's with Ross |
 | "Delete my note about …" (one library note) | one confirm, then binned, plus a `drive:/_inbox/…-binned-….md` note |
 | "Delete <client>'s log" | the ⚠️ critical warning naming what breaks; "no" leaves it; "yes" bins it and leaves an `_inbox` note |
 | You release a change; next court sheet | carries the "Sync" nudge; after Sync, the change is visible |

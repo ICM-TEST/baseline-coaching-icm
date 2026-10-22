@@ -16,6 +16,7 @@ folder is in git.
 | `sam-sample` | archived: drops out of the roster, folder stays |
 | `jo-placeholder` | no phone: flagged in open-items, not skipped silently |
 | `_requests/2026-10-10-group-bookings.md` | an open request shows up for Ross |
+| `_requests/2026-10-12-note-court-keys.md` | a note for Ross shows up, marked as a note |
 
 `fake-rclone.py` stands in for rclone (via `ICM_RCLONE`) so the `--from-drive` path
 is tested without Google: `selftest.py` turns `data/` into the shape rclone sees —
