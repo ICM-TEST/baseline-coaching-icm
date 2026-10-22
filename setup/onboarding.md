@@ -94,4 +94,33 @@ On their account, at claude.ai on a computer:
 python3 tools/validate.py --from-drive kyle:        # what state is the book in?
 python3 tools/build-indexes.py --from-drive kyle:   # roster, open items, file map
 ```
-Read `drive:/_requests/` on the settling-curve cadence (PRD §4.7).
+Read `drive:/_requests/` on the settling-curve cadence (PRD §4.7) — and whenever a
+request alert arrives (below).
+
+## Request alerts — one script for every client
+
+`tools/request-alerts.gs` emails you when a new request or note lands in any client's
+`drive:/_requests/`. It runs in **your** Google account, checks every 3 hours, sends at
+most one email per check (however many clients), emails a problem once, and sends a
+"still working" email on Monday at 08:00. Free; uses no Claude usage.
+
+**First time (about 15 minutes, on a computer):**
+1. Sign in to Google with the account that can open the clients' folders, then go to
+   **script.google.com** → **New project**. Click "Untitled project" and name it
+   **Request alerts**.
+2. Select everything in the editor, delete it, and paste in the whole of
+   `tools/request-alerts.gs`.
+3. In Drive, open the client's data folder. Copy the end of the web address, after
+   `/folders/`. In the script, replace `PASTE_FOLDER_ID_HERE` with it (keep the quotes).
+4. Left bar: ⚙️ **Project Settings** → **Time zone** → *(GMT+02:00) Johannesburg*.
+   Back to **< > Editor**. Press 💾 **Save**.
+5. In the bar above the code, pick **setup** from the function list → **Run**.
+6. **Review permissions** → your account → "Google hasn't verified this app" →
+   **Advanced** → **Go to Request alerts (unsafe)** → **Allow**. (It's your own script;
+   it asks to read Drive and Docs and to send email as you.)
+7. Within a minute: an email "Request alerts are on", with ✓ next to each client.
+   A ✗ says what to fix.
+
+**Add a client:** add a line inside `CLIENTS` — `'Car wash': 'FOLDER_ID',` — save, run
+**setup** again. **Check now:** run **checkRequests**. **Turn off:** run **stopAlerts**.
+
