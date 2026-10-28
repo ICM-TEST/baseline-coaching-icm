@@ -17,14 +17,15 @@ The how-to under `setup/CONTEXT.md`. Runs only while working in `setup/`.
 2. Search Drive for a **folder** with exactly that title, owned by Kyle.
    - One → step 3.
    - None → "I can't find a folder called *<name>*. Create it now?" On yes, create
-     it at the top of his Drive. Anything else → stop; nothing is created.
+     it at the top of his Drive and go to § 2 — that yes was the confirm. Anything
+     else → stop; nothing is created.
    - Several → ask once which, using a detail you can see (where it sits, when it
      was last changed). Never a numbered list.
 3. Confirm once: "Set up your coaching workspace in *<name>*?" Wait for yes. Never use
    a different folder that "looks right".
 
 Two or more `_coaching-workspace.md` Docs already exist → don't pick. Tell Kyle in one
-line which folders hold one, ask which is his coaching folder, and write an
+line which folders hold one, ask which is his coaching folder, and write a
 `drive:/_inbox/` note for Ross naming the others. Never bin one yourself.
 
 ## 2 · Mark it
