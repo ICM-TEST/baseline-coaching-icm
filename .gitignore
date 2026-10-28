@@ -7,5 +7,5 @@ __pycache__/
 *.pyc
 
 # Anything that looks like a copy of client data
-mirror/
-data/
+/mirror/
+/data/
