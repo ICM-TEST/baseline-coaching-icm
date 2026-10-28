@@ -43,7 +43,7 @@ Clients point to these by slug, so check before anything moves:
 ## A value that isn't set
 
 A task needs a value that reads `(not set)` — a cancellation outcome, a court's
-travel time, the Saturday hours.
+travel time, Saturday availability.
 
 1. Ask Kyle that one thing, in one line, and carry on with his answer.
 2. Save it as a change (§ Change a value) — the question is the confirm; don't ask

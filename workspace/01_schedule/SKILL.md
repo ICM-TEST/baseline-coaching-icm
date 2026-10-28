@@ -23,9 +23,10 @@ family's. It is asked about, never inferred.
    there, search for the slug folder inside `drive:/clients/`. Not a client yet → that is
    `clients/CONTEXT.md`; create the record first, then come back.
 2. Check the slot against the calendar **and** against `drive:/_settings/coach.md`: inside
-   hours, and the travel time from the previous lesson's court to this one fits.
-3. Conflict, outside hours, or travel doesn't fit → say which in one line, offer the
-   nearest two slots that work, create nothing.
+   his availability, and the travel time from the previous lesson's court to this one fits.
+3. Conflict, outside his availability, or travel doesn't fit → say which in one line, offer the
+   nearest two slots that work, create nothing. If Kyle still wants it, or the slot
+   only fits by pushing other lessons, do § 2a before anything moves.
 4. Read back the slot in plain words — "Ethan, Tue 21 Oct, 16:00, 60 min, Kelvin
    Grove 3?" — and wait for yes.
 5. Create the event:
@@ -39,6 +40,32 @@ family's. It is asked about, never inferred.
 | `description` | the client-visible brief bullets if one exists, then a blank line, then `icm-client: <slug>` as the **last line** |
 
 6. Append one line to `drive:/clients/<slug>/log.md`: date booked, slot, court.
+
+## 2a. Is it worth it?
+
+Kyle's time is the stock: a lesson that costs a drive, or pushes others later, can
+earn less than it loses. When a booking request only fits by moving other lessons,
+when it would push the day past his availability, or when Kyle asks "should I take
+this?", work it out before he says yes.
+
+1. **Read** that day's calendar (free), then `drive:/_settings/coach.md` (availability,
+   courts, travel) and `drive:/_settings/rates.md` (the price of each lesson). A
+   price Kyle gives for a request ("R200 for an hour at SACS") wins over the table.
+2. **Lay out the day with the request in it:** each lesson where it can start once
+   the drive from the last court is done, inside his availability. Note what moves
+   and what no longer fits — a booked lesson, or another request Kyle mentioned in
+   this chat.
+3. **Compare** the two days: money in against money lost, and extra driving minutes.
+   A price that's `(not set)` → compare by lessons kept, and say so.
+4. **Say it in two lines,** then the choice:
+   "Taking 3pm at SACS means you can't reach Plumstead for 4 — your 4 and 5 move to
+   5 and 6, and the 6pm request no longer fits. +R200, −R300: R100 worse. Skip it, or
+   offer them another time?"
+   Comes out ahead or even → say so in one line and carry on with § 2 step 4.
+
+Never move or decline anything here. Moving a booked lesson is § 4, one client at a
+time, each confirmed; declining is Kyle's message to send (rule 4). Nothing is
+saved: a request Kyle hasn't said yes to lives only in this chat.
 
 ## 3. Recurring series
 

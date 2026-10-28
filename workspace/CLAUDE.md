@@ -29,7 +29,7 @@ Data paths are written `drive:/…`, e.g. `drive:/clients/ethan-moloi/client.md`
 | A client: create, update, archive, medical, consent, collection, incidents | `clients/CONTEXT.md` |
 | Book, recur, reschedule, cancel, reminders, court sheet, briefs | `01_schedule/CONTEXT.md` |
 | Drills, programme designs, court notes, anything Kyle knows | `library/CONTEXT.md` |
-| Rates, cancellation policy, courts, hours, clearances, voice, levels — reading or changing | `_settings/CONTEXT.md` |
+| Rates, cancellation policy, courts, availability, clearances, voice, levels — reading or changing | `_settings/CONTEXT.md` |
 | Names, record shapes, allowed values | `_system/schema.md` |
 | First run, no marked folder, or a Drive folder or settings file missing | `setup/CONTEXT.md` |
 | Something you can't place yet | `drive:/_inbox/YYYY-MM-DD-slug.md` |

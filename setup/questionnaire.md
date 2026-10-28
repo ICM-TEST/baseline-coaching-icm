@@ -4,7 +4,7 @@ Ross works through this with the client before the first release of their instan
 repo. It covers only what Ross must decide or write into the instance repo — every
 remaining `{{FILL}}` there is answered here. Allow about 30 minutes.
 
-Their own settings — calendar, hours, courts, travel times, clearances, rates,
+Their own settings — calendar, availability, courts, travel times, clearances, rates,
 packages, cancellation policy, levels and voice — are **not** asked here. Their
 Claude asks for those at first-run setup, keeps them in their Drive
 (`drive:/_settings/`), and lets them change any of them by chat.

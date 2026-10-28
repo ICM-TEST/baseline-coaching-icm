@@ -9,7 +9,7 @@ pre-lesson brief. Its output lives in `drive:/01_schedule/`.
 
 - Creating or changing a client record → `clients/CONTEXT.md` (come back here to book).
 - What happened in a lesson → `02_sessions` is dormant; that is a request.
-- Changing the cancellation policy, rates or courts → a request.
+- Changing the cancellation policy, rates, availability or courts → `_settings/CONTEXT.md`.
 
 ## Goal
 
@@ -21,7 +21,7 @@ and Kyle reading three lines per lesson each morning.
 - **Working:** what Kyle says; Google Calendar (`calendar-id` in `drive:/_settings/coach.md`);
   `drive:/clients/<slug>/client.md` and the last entry of `drive:/clients/<slug>/log.md`;
   `drive:/_release.md` (court sheet only, for the version check); Kyle's settings —
-  `drive:/_settings/coach.md` (hours, courts, travel, clearances),
+  `drive:/_settings/coach.md` (availability, courts, travel, clearances),
   `drive:/_settings/rates.md` (cancellation policy), `drive:/_settings/voice.md`.
   A setting the task needs reads `(not set)` → `_settings/CONTEXT.md`.
 - **Reference:** `_templates/brief.md`, `_templates/messages/`,
@@ -42,7 +42,7 @@ and Kyle reading three lines per lesson each morning.
 
 ## Process
 
-Every workflow — book, recur, reschedule/cancel, remind, court sheet, brief — is in
+Every workflow — book (and whether a lesson is worth taking), recur, reschedule/cancel, remind, court sheet, brief — is in
 `SKILL.md`. Two of them run on a timer, as scheduled tasks inside Kyle's coaching
 project: the 06:00 court sheet and the evening reminder drafts.
 

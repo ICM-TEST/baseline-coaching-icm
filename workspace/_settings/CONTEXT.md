@@ -1,9 +1,9 @@
 # _settings — Kyle's settings
 
 The facts that change how the system **behaves** for Kyle: what lessons cost and what
-happens when one is cancelled, where and when he coaches and how long it takes to get
-between courts, which clearances he holds, how he sounds in a message, and which
-levels exist. The values are Kyle's and live in his Drive, in `drive:/_settings/`;
+happens when one is cancelled, when clients can book him, where he coaches and how
+long it takes to get between courts, which clearances he holds, how he sounds in a
+message, and which levels exist. The values are Kyle's and live in his Drive, in `drive:/_settings/`;
 he sets them at first-run setup and changes them by chat. Which settings exist — the
 files, their sections and columns — is Structure.
 
@@ -29,7 +29,7 @@ change it himself without breaking a client record.
 
 | File | Holds | Read by |
 |---|---|---|
-| `drive:/_settings/coach.md` | calendar, hours, courts, travel times, clearances | `01_schedule`, `clients` |
+| `drive:/_settings/coach.md` | calendar, availability, courts, travel times, clearances | `01_schedule`, `clients` |
 | `drive:/_settings/rates.md` | rates, packages, cancellation and no-show policy | `01_schedule`, `clients` |
 | `drive:/_settings/voice.md` | how Kyle writes to parents and players | every message draft |
 | `drive:/_settings/levels.md` | the closed list of levels | `clients`, `library` |

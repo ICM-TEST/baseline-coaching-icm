@@ -654,6 +654,20 @@ def _():
     assert "rate" not in rule6 and "level" not in rule6, rule6
 
 
+@case("settings: setup asks for availability, and the coach shape calls it that")
+def _():
+    assert "What hours do you want clients to be able to book you" in (WS / "setup" / "SKILL.md").read_text()
+    assert "## Availability" in (WS / "_templates" / "settings" / "coach.md").read_text()
+
+
+@case("schedule: the worth-it check weighs a request, and never moves or declines anything")
+def _():
+    skill = (WS / "01_schedule" / "SKILL.md").read_text()
+    sec = skill.split("## 2a. Is it worth it?", 1)[1].split("\n## ", 1)[0]
+    assert "`drive:/_settings/rates.md`" in sec and "travel" in sec
+    assert "Never move or decline anything here" in sec and "rule 4" in sec
+
+
 @case("critical list: the marker and _settings/ are on it")
 def _():
     s, _ = roots()

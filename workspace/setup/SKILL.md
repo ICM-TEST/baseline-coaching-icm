@@ -66,7 +66,7 @@ order. A skip, or "don't know", leaves `(not set)`; never ask it again here.
 | # | File | Ask |
 |---|---|---|
 | 1 | `coach.md` | "Which Google Calendar do your lessons go in — your main one?" (Find its id with the Calendar connector; never ask him for an id.) |
-| 2 | `coach.md` | "What hours do you coach — weekdays, Saturday, Sunday?" |
+| 2 | `coach.md` | "What hours do you want clients to be able to book you — weekdays, Saturday, Sunday?" |
 | 3 | `coach.md` | "Where do you coach? For each court: the name, where it is, anything useful — lights, access, parking." (Make each slug from the name.) |
 | 4 | `coach.md` | "How many minutes is the drive between those courts? And how much gap do you want between back-to-back lessons on the same court?" (One court → only the second half.) |
 | 5 | `coach.md` | "When do your coaching qualification, first aid and police clearance expire?" |

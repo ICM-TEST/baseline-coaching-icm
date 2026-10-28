@@ -6,7 +6,7 @@ timezone: Africa/Johannesburg
 
 # Coach — FIXTURE
 
-## Hours
+## Availability
 
 | Day | From | To |
 |---|---|---|

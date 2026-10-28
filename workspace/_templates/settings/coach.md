@@ -9,7 +9,9 @@ timezone: Africa/Johannesburg
 Where and when Kyle coaches. Filled at first-run setup; Kyle changes any value by
 chat. A value still `(not set)` is asked for the first time a task needs it.
 
-## Hours
+## Availability
+
+The hours clients can book Kyle. Booking never offers a slot outside them.
 
 | Day | From | To |
 |---|---|---|

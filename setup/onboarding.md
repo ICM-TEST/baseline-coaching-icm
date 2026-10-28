@@ -82,7 +82,7 @@ On their account, at claude.ai on a computer:
 1. In the project: "Set up my workspace." Their Claude asks what they named their
    folder, finds it (or offers to create it), confirms once, leaves a
    `_coaching-workspace.md` file in it and creates the folders.
-2. Then nine short questions, one at a time: calendar, hours, courts, travel times,
+2. Then nine short questions, one at a time: calendar, availability, courts, travel times,
    clearances, rates, cancellation policy, levels, and a few real messages for their
    voice. "Skip" is fine — their Claude asks again when it needs that answer.
 3. They share `_requests` with you (§ 3.2).

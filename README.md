@@ -67,7 +67,7 @@ Rollback is `git revert` + another release. Turning a module on is one line in
   `workspace/_system/conventions.md` § Error 500 reasons).
 - **The client names their own folder** (28 Oct 2026). First-run setup asks for it
   and leaves `_coaching-workspace.md` in it; every chat finds the folder by that file.
-- **Settings are the client's** (28 Oct 2026). Rates and policy, hours, courts,
+- **Settings are the client's** (28 Oct 2026). Rates and policy, availability, courts,
   travel, clearances, voice and levels live in `drive:/_settings/`, asked for at
   first-run setup and changed by chat (one confirm; a warning before removing a level
   or court in use). The repo keeps only their shapes (`workspace/_templates/settings/`);

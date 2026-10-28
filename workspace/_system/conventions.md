@@ -121,7 +121,7 @@ this list covers the whole data folder layout.
 | Path | What breaks |
 |---|---|
 | `drive:/_coaching-workspace.md` | every chat — Claude can't find this folder any more and asks to set up again |
-| `drive:/_settings/` | **everything in it** — rates, cancellation policy, hours, courts, clearances, voice and levels; booking and cancelling stop working until they're set again |
+| `drive:/_settings/` | **everything in it** — rates, cancellation policy, availability, courts, clearances, voice and levels; booking and cancelling stop working until they're set again |
 | `drive:/clients/` | every client record — the whole book |
 | `drive:/clients/<slug>/` | that client's whole history: card, log, programme, lessons, agreements, incidents |
 | `drive:/clients/<slug>/client.md` | the client drops out of the roster; the rest of the record is orphaned |
