@@ -10,7 +10,7 @@ supersedes:          # the previous agreement's date, if any
 
 <!-- A coaching agreement, never a "contract" — that word means a CONTEXT.md here.
      Terms that govern behaviour (cancellation, notice, no-shows) are NOT restated:
-     they live in _shared/rates.md and apply as written there. -->
+     they live in drive:/_settings/rates.md and apply as written there. -->
 
 ## What was agreed
 - Cadence and slot:

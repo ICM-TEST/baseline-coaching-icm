@@ -6,7 +6,7 @@ and never writes anywhere in Structure.
 
 ## Not this?
 
-- A rate, a court, Kyle's voice → `_shared/CONTEXT.md`.
+- A rate, a court, a level, Kyle's voice → `_settings/CONTEXT.md` (Kyle's values, in his Drive).
 - A client's record → `clients/CONTEXT.md`.
 
 ## Goal

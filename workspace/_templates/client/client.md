@@ -3,13 +3,13 @@ client:              # slug, e.g. ethan-moloi — same as the folder name
 name:
 status: trial        # trial | active | paused | dormant | archived
 dob:                 # YYYY-MM-DD
-level:               # from _shared/curriculum.md
+level:               # from drive:/_settings/levels.md
 started:             # YYYY-MM-DD
 cadence:             # weekly | fortnightly | block | ad-hoc
 default-slot:        # the usual slot in words, e.g. "Tue 16:00". The calendar owns real times.
 series-event:        # Google Calendar id of the recurring series — written back at booking
 duration: 60         # 30 | 45 | 60 | 90
-court:               # court slug from _shared/coach.md
+court:               # court slug from drive:/_settings/coach.md
 rate:
 rate-unit:           # per-hour | per-session | package
 package:             # e.g. "10-lesson block, started 2026-08-01"

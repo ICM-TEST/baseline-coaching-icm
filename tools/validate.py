@@ -5,10 +5,11 @@ Checks the two roots of an ICM instance and changes nothing:
 
   Structure  the repo's workspace/ — every path a contract names must resolve,
              data paths must be written drive:/…, placeholders are flagged.
-  Data       the client's Drive folder — layout, record shapes, closed
-             vocabularies, reserved names, the release marker. Records are
-             Google Docs, so read it with --from-drive (tools/drive.py); --data
-             is for a local plain-text copy (the selftest fixtures).
+  Data       the client's Drive folder — layout, the folder marker, Kyle's
+             settings, record shapes, closed vocabularies, reserved names, the
+             release marker. Records are Google Docs, so read it with
+             --from-drive (tools/drive.py); --data is for a local plain-text
+             copy (the selftest fixtures).
 
     python3 tools/validate.py                          # structure only
     python3 tools/validate.py --data "<drive folder>"  # both roots, a local copy
@@ -37,8 +38,11 @@ RESERVED = {"CLAUDE.md", "CONTEXT.md", "SKILL.md"}
 FILL = "{{FILL"
 
 # ── Data layout (must match workspace/CONTEXT.md § Data folder) ──────────────
-DATA_DIRS = {"clients", "library", "_requests", "_inbox", "_index"}   # + live module folders
-DATA_FILES = {"FILE-MAP.md", "_release.md"}
+DATA_DIRS = {"_settings", "clients", "library", "_requests", "_inbox", "_index"}   # + live module folders
+MARKER = "_coaching-workspace.md"          # how Kyle's agent finds the folder
+DATA_FILES = {MARKER, "FILE-MAP.md", "_release.md"}
+SETTINGS = {"coach.md", "rates.md", "voice.md", "levels.md"}   # = workspace/_templates/settings/
+UNSET = "(not set)"
 RECORD_DIRS = {"sessions", "agreements", "incidents", "output"}
 RECORD_FILES = {"client.md", "log.md", "programme.md"}
 LIBRARY_DIRS = {"drills", "programmes", "courts", "notes"}
@@ -254,7 +258,7 @@ def critical_required(structure: Path) -> set[str]:
     tops = {f"drive:/{d}/" for d in DATA_DIRS - {"_index"}} | {f"drive:/{m}/" for m in live_modules(structure)}
     record = {"drive:/clients/<slug>/"} | {f"drive:/clients/<slug>/{f}" for f in RECORD_FILES} \
         | {f"drive:/clients/<slug>/{d}/" for d in RECORD_DIRS}
-    return tops | record | {"drive:/_release.md"}
+    return tops | record | {"drive:/_release.md", f"drive:/{MARKER}"}
 
 
 def check_critical(r: Report):
@@ -281,7 +285,14 @@ def check_structure(r: Report, for_release: bool):
     r.structure_version = version_of(s / "_system" / "version.md")
     if not parse_version(r.structure_version):
         r.add("error", "version", "_system/version.md", f"version '{r.structure_version}' is not X.Y.Z")
-    targets = list((s / "_shared").glob("*.md")) + [s / "_system" / "policies.md"]
+    shapes = {p.name for p in (s / "_templates" / "settings").glob("*.md")}
+    if shapes != SETTINGS:
+        r.add("error", "settings-shape", "_templates/settings/",
+              f"expected {sorted(SETTINGS)}, found {sorted(shapes)} — validate.py and the templates disagree")
+    for p in sorted((s / "_templates").rglob("*.md")):
+        if FILL in p.read_text(encoding="utf-8"):
+            r.add("error", "fill", rel(s, p), f"a template is copied into Kyle's Drive — use {UNSET}, never {{{{FILL}}}}")
+    targets = [s / "_system" / "policies.md"]
     if s == STRUCTURE:   # the Ross-only setup files that carry instance answers
         targets += [REPO / "setup" / "project-instructions.md", REPO / "setup" / "scheduled-tasks.md"]
     for p in targets:
@@ -317,6 +328,8 @@ def check_layout(r: Report):
         elif p.is_file() and p.name not in DATA_FILES:
             r.add("error", "stray-file", p.name, "loose file at the top of the data folder — route it to _inbox/")
     missing = sorted(t for t in tops - {"_index"} if not (d / t).is_dir())
+    if not (d / MARKER).is_file():
+        missing.insert(0, MARKER)
     if missing:
         r.add("warning", "setup", "/", f"missing {', '.join(missing)} — run first-run setup (workspace/setup/)")
 
@@ -359,10 +372,40 @@ def check_layout(r: Report):
                 vocab_check(r, "message", fm, rel(d, m))
 
 
+def check_settings(r: Report):
+    """drive:/_settings/ — Kyle's values in Ross's shapes. Unset values are his to give
+    (the agent asks when a task needs one), so they warn and never block a release."""
+    folder = r.data / "_settings"
+    if not folder.is_dir():
+        return                       # check_layout already says setup is unfinished
+    for p in sorted(folder.iterdir()):
+        if not visible(p):
+            continue
+        if p.is_dir():
+            r.add("error", "invented-folder", rel(r.data, p), "no folders inside _settings/")
+        elif p.name not in SETTINGS:
+            r.add("error", "stray-file", rel(r.data, p), f"not a settings file — the four are {', '.join(sorted(SETTINGS))}")
+    for name in sorted(SETTINGS):
+        p = folder / name
+        if not p.exists():
+            r.add("warning", "setup", rel(r.data, p), "settings file missing — first-run setup asks for it")
+            continue
+        fm, err = read_frontmatter(p)
+        if err:
+            r.add("error", "frontmatter", rel(r.data, p), err)
+            continue
+        if fm.get("setting") != name[:-3]:
+            r.add("error", "settings-shape", rel(r.data, p), f"setting: '{fm.get('setting')}' but the file is {name}")
+        if (n := p.read_text(encoding="utf-8").count(UNSET)):
+            r.add("warning", "settings-unset", rel(r.data, p), f"{n} value(s) still {UNSET} — Kyle's agent asks when one is needed")
+        if FILL in p.read_text(encoding="utf-8"):
+            r.add("error", "fill", rel(r.data, p), f"{{{{FILL}}}} in Kyle's settings — an unanswered value is {UNSET}")
+
+
 def check_clients(r: Report):
     s, d = r.structure, r.data
-    curriculum, coach = s / "_shared" / "curriculum.md", s / "_shared" / "coach.md"
-    levels = table_first_column(curriculum.read_text(encoding="utf-8")) if curriculum.exists() else set()
+    lv, coach = d / "_settings" / "levels.md", d / "_settings" / "coach.md"
+    levels = table_first_column(lv.read_text(encoding="utf-8")) if lv.exists() else set()
     courts = table_first_column(coach.read_text(encoding="utf-8"), "Courts") if coach.exists() else set()
     clients = d / "clients"
     if not clients.is_dir():
@@ -397,9 +440,9 @@ def check_clients(r: Report):
         if fm.get("client") and fm["client"] != rec.name:
             r.add("error", "slug-mismatch", cp, f"client: '{fm['client']}' but the folder is '{rec.name}'")
         if fm.get("level") and levels and fm["level"] not in levels:
-            r.add("error", "vocab", cp, f"level: '{fm['level']}' is not in _shared/curriculum.md")
+            r.add("error", "vocab", cp, f"level: '{fm['level']}' is not in Kyle's levels (_settings/levels.md) — his agent offers to add it")
         if fm.get("court") and courts and fm["court"] not in courts:
-            r.add("error", "vocab", cp, f"court: '{fm['court']}' is not a court in _shared/coach.md")
+            r.add("error", "vocab", cp, f"court: '{fm['court']}' is not a court in Kyle's settings (_settings/coach.md)")
         for key in ("dob", "started", "media-consent-date"):
             if fm.get(key) and not DATE_RE.match(str(fm[key])):
                 r.add("error", "date", cp, f"{key}: '{fm[key]}' is not YYYY-MM-DD")
@@ -520,6 +563,7 @@ def run(structure: Path | str = STRUCTURE, data: Path | str | None = None,
             r.add("error", "no-data", str(r.data), "data folder not found")
             return r
         check_layout(r)
+        check_settings(r)
         check_clients(r)
         check_requests(r)
         check_library(r)

@@ -1,5 +1,7 @@
 /**
  * Request alerts — emails Ross when a new file lands in a client's `_requests/` folder.
+ * The client shares just that folder with Ross, as Viewer; nothing else in their
+ * Drive is needed. (The whole data folder works too, if they've shared that.)
  *
  * Runs in Ross's own Google account at script.google.com. Ross only: it is not part
  * of any client's workspace and no client's Claude ever sees it.
@@ -13,8 +15,8 @@
  */
 
 // ── Edit these ──────────────────────────────────────────────────────────────
-// One line per client: a name you'll recognise → the ID of their data folder
-// (in the folder's web address, the part after /folders/).
+// One line per client: a name you'll recognise → the ID of the _requests folder
+// they shared with you (in the folder's web address, the part after /folders/).
 const CLIENTS = {
   'Kyle': 'PASTE_FOLDER_ID_HERE',
 };
@@ -116,18 +118,21 @@ function openRequests_(folderId) {
   if (!folderId || folderId.indexOf('PASTE') === 0) {
     return { problem: 'no folder ID yet — paste it into CLIENTS', files: [] };
   }
-  let root;
+  let folder;
   try {
-    root = DriveApp.getFolderById(folderId);
+    folder = DriveApp.getFolderById(folderId);
   } catch (e) {
     return { problem: "can't open the folder — check the ID and that it's still shared with you", files: [] };
   }
-  const subs = root.getFoldersByName('_requests');
-  if (!subs.hasNext()) {
-    return { problem: 'no _requests folder yet (the workspace may not be set up)', files: [] };
+  if (folder.getName() !== '_requests') {   // the whole data folder was shared: look inside
+    const subs = folder.getFoldersByName('_requests');
+    if (!subs.hasNext()) {
+      return { problem: "that folder isn't _requests and has no _requests inside — share _requests itself", files: [] };
+    }
+    folder = subs.next();
   }
   const files = [];
-  const it = subs.next().getFiles();
+  const it = folder.getFiles();
   while (it.hasNext()) {
     const f = it.next();
     if (!f.isTrashed()) files.push(f);

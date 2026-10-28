@@ -53,7 +53,7 @@ two-root form above — a markdown link can't cross from GitHub to Drive.
 
 Written once, linked everywhere else. A copied paragraph is a fact with two homes,
 and one of them goes stale. Times live in Google Calendar; policies live in
-`_shared/rates.md`; a record points to them and never restates them.
+`drive:/_settings/rates.md`; a record points to them and never restates them.
 
 ## File formats
 
@@ -120,6 +120,8 @@ this list covers the whole data folder layout.
 
 | Path | What breaks |
 |---|---|
+| `drive:/_coaching-workspace.md` | every chat — Claude can't find this folder any more and asks to set up again |
+| `drive:/_settings/` | **everything in it** — rates, cancellation policy, hours, courts, clearances, voice and levels; booking and cancelling stop working until they're set again |
 | `drive:/clients/` | every client record — the whole book |
 | `drive:/clients/<slug>/` | that client's whole history: card, log, programme, lessons, agreements, incidents |
 | `drive:/clients/<slug>/client.md` | the client drops out of the roster; the rest of the record is orphaned |
@@ -168,13 +170,16 @@ row that fits; fill the angle brackets.
 
 | Kyle tries to… | Reason line |
 |---|---|
-| set a field to a value that isn't allowed — a level, a court, a status | "<what he said>" isn't one of the <field>s the system is set up with: <every allowed value>. |
-| change a rate, the cancellation policy, his hours, a court's details or his voice | Your <thing> is part of how the system is set up. |
-| add a field or a new kind of record, or change a template, contract, rule or this map | That would change how the system is built. |
+| set a field to a value outside a fixed list in `_system/schema.md` — a status, a cadence, a lesson length, an incident type | "<what he said>" isn't one of the <field>s the system is set up with: <every allowed value>. |
+| change a safety rule — what is never stored, never sent, never done without him | That's one of the safety rules the system is built on. |
+| add a field, a new kind of record or setting, or change a template, contract, rule or this map | That would change how the system is built. |
 
-Allowed values come from where `_system/schema.md` says the field's list lives
-(levels: `_shared/curriculum.md`; courts: `_shared/coach.md`). List them all, in the
-order written there, joined with commas and a final "or".
+Allowed values are listed in `_system/schema.md`, in the order written there, all of
+them, joined with commas and a final "or".
+
+Not Error 500: a level or court that isn't in Kyle's settings, or any change to a
+rate, policy, hour, court, clearance, level or his voice. Those are his —
+`_settings/CONTEXT.md`.
 
 ## CONTEXT.md contract
 

@@ -21,8 +21,10 @@ The how-to under `clients/CONTEXT.md`. Runs only while working on client records
 3. Fill `client.md` frontmatter **only** from what Kyle said. Unknowns stay blank;
    never guess a phone number, a level or a rate. `status: trial` unless he says
    they're already a regular.
-4. `level:` must be in `_shared/curriculum.md`; `court:` must be a slug in
-   `_shared/coach.md`. Not there → leave blank, mention it in the read-back.
+4. `level:` must be in `drive:/_settings/levels.md`; `court:` must be a slug in
+   `drive:/_settings/coach.md`. Not there → leave it blank and, in the read-back,
+   offer to add it: "*intermediate* isn't one of your levels — add it?" A yes is the
+   confirm for `_settings/CONTEXT.md` (add a row); then fill the field.
 5. First `log.md` entry: today's date, how they came in, what was agreed.
 6. Read back **three lines**: name and level · slot and court · what's still missing
    (phone, medical, consent). Then: "Want me to book the first lesson?" — booking is
@@ -30,7 +32,8 @@ The how-to under `clients/CONTEXT.md`. Runs only while working on client records
 
 ## Update a record
 
-Change only the field Kyle named — replace its one line. Add a one-line `log.md` entry for anything a future
+Change only the field Kyle named — replace its one line. A level or court that
+isn't in his settings → offer to add it first, as in Create a client step 4. Add a one-line `log.md` entry for anything a future
 reader would want to know changed (level, guardian, phone, rate). Confirm in one line.
 
 ## Safeguarding details

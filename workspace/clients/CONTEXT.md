@@ -9,7 +9,8 @@ records live in `drive:/clients/`; this folder holds only the contract.
 
 - Booking, moving or cancelling a lesson → `01_schedule/CONTEXT.md`.
 - A drill or a programme design → `library/CONTEXT.md`.
-- A rate, policy or record-shape change → Error 500 (`CLAUDE.md` rule 6).
+- A rate, policy, level or court of his own → `_settings/CONTEXT.md`.
+- A record-shape change — a new field or kind of record → Error 500 (`CLAUDE.md` rule 6).
 
 ## Goal
 
@@ -20,7 +21,7 @@ need to know to keep them safe today" in one read.
 
 - **Working:** what Kyle says; the client's own folder, `drive:/clients/<slug>/`.
 - **Reference:** `_templates/client/`, `_templates/incident.md`,
-  `_templates/agreement.md`, `_shared/curriculum.md`, `_shared/coach.md`
+  `_templates/agreement.md`, `drive:/_settings/levels.md`, `drive:/_settings/coach.md`
   (court slugs), `_system/schema.md`, `drive:/_index/roster.md`.
 
 ## A record

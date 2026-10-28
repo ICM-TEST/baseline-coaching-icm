@@ -22,7 +22,8 @@ anything Kyle knows about a player is written where the next brief will find it.
 | Map and contracts | `CLAUDE.md`, every `CONTEXT.md` and `SKILL.md` | Ross |
 | Engine | `_system/` | Ross |
 | Types — the stamps | `_templates/` | Ross |
-| Rules | `_shared/` | Ross |
+| Settings — the shapes | `_templates/settings/`, `_settings/` | Ross |
+| Settings — the values | `drive:/_settings/` | Kyle, through the agent |
 | Instances | `drive:/clients/<slug>/` | Kyle, through the agent |
 | Knowledge | `drive:/library/` | Kyle |
 | Module output | `drive:/01_schedule/` | the agent; Kyle reads and sends |
@@ -32,12 +33,15 @@ anything Kyle knows about a player is written where the next brief will find it.
 | Release marker | `drive:/_release.md` | Ross's `release.py` only |
 
 The test for any file: does changing it change what the system **does** (Structure,
-Ross's), or only what it **knows** (Data, Kyle's)?
+Ross's), or only what it **knows** (Data, Kyle's)? Settings are the one split: what
+can be set is Structure; what it is set to is Kyle's.
 
 ## Data folder
 
 ```
-drive:/
+drive:/                Kyle's coaching folder — any name; found by _coaching-workspace.md
+├─ _coaching-workspace.md   the marker
+├─ _settings/          coach.md · rates.md · voice.md · levels.md
 ├─ clients/<slug>/     client.md · log.md · programme.md · sessions/ · agreements/ · incidents/ · output/
 ├─ library/            drills/ · programmes/ · courts/ · notes/
 ├─ 01_schedule/        briefs/ · messages/ · court-sheets/

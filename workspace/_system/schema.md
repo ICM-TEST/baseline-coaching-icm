@@ -2,7 +2,9 @@
 
 Every record's shape and every allowed value. Ross's `validate.py` checks the whole
 data folder against this file. **A value not listed here is an error**, not a new
-option — a new value is a structure change (`CLAUDE.md` rule 6).
+option — a new value in a fixed list here is a structure change (`CLAUDE.md`
+rule 6). Levels and courts are the exception: their lists are Kyle's, in
+`drive:/_settings/`, and he adds to them through `_settings/CONTEXT.md`.
 
 ## Reserved names
 
@@ -11,8 +13,23 @@ option — a new value is a structure change (`CLAUDE.md` rule 6).
 
 ## Placeholder marker
 
-`{{FILL: question}}` — a value only Kyle can supply. Allowed in the template repo;
-never in a released instance.
+`{{FILL: question}}` — an answer Ross supplies when he sets up an instance
+(`_system/policies.md`, his setup files). Allowed in the template repo; never in a
+released instance. Kyle's own answers never use it: an unanswered setting in
+`drive:/_settings/` reads `(not set)`.
+
+## Folder marker — `drive:/_coaching-workspace.md`
+
+Template: `_templates/coaching-workspace.md`. Exactly one in Kyle's Drive, at the top
+of his coaching folder; every chat finds `drive:/` by it. Frontmatter `created:` and
+`structure-version:` (the version at first-run setup).
+
+## Settings — `drive:/_settings/<name>.md`
+
+Exactly four files, each a Doc made from its template in `_templates/settings/`:
+`coach.md`, `rates.md`, `voice.md`, `levels.md`. Frontmatter `setting:` names the
+file. Their sections and columns are fixed by the template; every value is Kyle's.
+A value not given yet reads `(not set)`.
 
 ## Client — `drive:/clients/<slug>/client.md`
 
@@ -23,11 +40,11 @@ holds them.
 | Field | Allowed |
 |---|---|
 | `status` | `trial` · `active` · `paused` · `dormant` · `archived` |
-| `level` | a level listed in `_shared/curriculum.md` |
+| `level` | a level listed in `drive:/_settings/levels.md` |
 | `cadence` | `weekly` · `fortnightly` · `block` · `ad-hoc` |
 | `duration` | `30` · `45` · `60` · `90` |
 | `rate-unit` | `per-hour` · `per-session` · `package` |
-| `court` | a court slug from `_shared/coach.md` |
+| `court` | a court slug from `drive:/_settings/coach.md` |
 | `media-consent` | `yes` · `no` · `unknown` — **unknown means no** |
 | `may-collect`, `may-not-collect` | lists of names, may be empty |
 

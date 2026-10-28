@@ -4,7 +4,7 @@ The how-to under `01_schedule/CONTEXT.md`. Runs only while working on the schedu
 §1, §3, §4 and §5 are taken from the schedule skill in Ross's own second brain and adapted
 from Notion to client records; they were already right.
 
-**One calendar:** `calendar-id` in `_shared/coach.md`, timezone `Africa/Johannesburg`.
+**One calendar:** `calendar-id` in `drive:/_settings/coach.md`, timezone `Africa/Johannesburg`.
 
 ## 1. Always ask, never assume
 
@@ -22,7 +22,7 @@ family's. It is asked about, never inferred.
 1. Resolve the client: `drive:/_index/roster.md` first; it may lag, so if the name isn't
    there, search for the slug folder inside `drive:/clients/`. Not a client yet → that is
    `clients/CONTEXT.md`; create the record first, then come back.
-2. Check the slot against the calendar **and** against `_shared/coach.md`: inside
+2. Check the slot against the calendar **and** against `drive:/_settings/coach.md`: inside
    hours, and the travel time from the previous lesson's court to this one fits.
 3. Conflict, outside hours, or travel doesn't fit → say which in one line, offer the
    nearest two slots that work, create nothing.
@@ -86,7 +86,7 @@ Weekday codes: `MO TU WE TH FR SA SU`.
 ## 5. Cancel
 
 1. Find the event; "this one or all of them?" as in §4.
-2. Apply `_shared/rates.md` to the notice given. State the outcome in one line —
+2. Apply `drive:/_settings/rates.md` to the notice given. State the outcome in one line —
    "Under 24 hours, so it's charged — right?" — and wait for Kyle's answer whenever
    money is involved.
 3. Delete the event (or the one instance). Cancelling the whole series also clears
@@ -104,7 +104,7 @@ Run by the scheduled task. For each lesson tomorrow:
 1. Phone missing on the record → no draft; add the client to the run's summary as
    "no number" so Kyle sees it.
 2. Otherwise draft from `_templates/messages/reminder.md` in Kyle's voice
-   (`_shared/voice.md`): day, time, court, and what they'll work on from the
+   (`drive:/_settings/voice.md`): day, time, court, and what they'll work on from the
    client-visible bullets. Nothing from "For Kyle only" or "Flags".
 3. Write to `drive:/01_schedule/messages/YYYY-MM-DD-<slug>.md`.
 4. Tell Kyle in one line: how many drafts are ready, and who has no number.
@@ -132,7 +132,7 @@ Into `drive:/01_schedule/court-sheets/YYYY-MM-DD.md`, and the same text as the t
   2. today, from the brief
   3. flags: medical extract, `may-not-collect`, "no consent to film" if relevant, owed money once Phase 4 is live
 - Travel: one line between lessons only where the gap is tight.
-- Clearances: one line for anything in `_shared/coach.md` expiring within 60 days or expired.
+- Clearances: one line for anything in `drive:/_settings/coach.md` expiring within 60 days or expired.
 - Version: read `drive:/_release.md`; if it is newer than `_system/version.md`, add the
   one-line update nudge from `_system/version.md`. Last line of the sheet.
 

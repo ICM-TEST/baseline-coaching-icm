@@ -61,11 +61,11 @@ def case(name):
 
 
 def roots() -> tuple[Path, Path]:
-    """Fresh (structure, data) in a temp folder: structure filled, data from fixtures."""
+    """Fresh (structure, data) in a temp folder: structure filled, data from fixtures
+    (a marked folder with Kyle's settings filled in)."""
     tmp = Path(tempfile.mkdtemp(prefix="icm-selftest-"))
     s, d = tmp / "workspace", tmp / "data"
     shutil.copytree(WS, s)
-    shutil.copytree(FIX / "structure", s, dirs_exist_ok=True)
     for p in list(s.rglob("*.md")):
         p.write_text(re.sub(r"\{\{FILL[^}]*\}\}", "fixture", p.read_text()), encoding="utf-8")
     shutil.copytree(FIX / "data", d)
@@ -181,7 +181,7 @@ def _():
 
 @case("rule 6: structure-change routes point to rule 6, feature gaps to rule 5")
 def _():
-    for f in ("_shared/CONTEXT.md", "clients/CONTEXT.md", "_system/schema.md", "_shared/curriculum.md"):
+    for f in ("_settings/CONTEXT.md", "_settings/SKILL.md", "clients/CONTEXT.md", "_system/schema.md"):
         assert "rule 6" in (WS / f).read_text(), f
     for f in ("02_sessions/CONTEXT.md", "01_schedule/SKILL.md"):
         assert "rule 5" in (WS / f).read_text(), f
@@ -389,14 +389,14 @@ def _():
     assert "vocab" in codes(run(s, d))
 
 
-@case("vocab: level not in the curriculum is an error")
+@case("vocab: level not in Kyle's levels (drive:/_settings/levels.md) is an error")
 def _():
     s, d = roots()
     set_field(d / "clients" / "alex-example" / "client.md", "level", "purple-ball")
     assert "vocab" in codes(run(s, d))
 
 
-@case("vocab: court not in coach.md is an error")
+@case("vocab: court not in Kyle's _settings/coach.md is an error")
 def _():
     s, d = roots()
     set_field(d / "clients" / "alex-example" / "client.md", "court", "wimbledon")
@@ -528,7 +528,7 @@ def _():
 @case("release refuses {{FILL}} placeholders unless --rehearsal")
 def _():
     repo, d = git_repo()
-    p = repo / "workspace" / "_shared" / "rates.md"
+    p = repo / "workspace" / "_system" / "policies.md"
     p.write_text(p.read_text() + "\n{{FILL: a question}}\n")
     subprocess.run(["git", "-C", str(repo), "commit", "-qam", "fill"], check=True)
     try:
@@ -549,6 +549,119 @@ def _():
     except release.Refused:
         pass
     assert not (d / "_release.md").exists()
+
+
+# ── Kyle's folder and settings: found by a marker, values in his Drive ───────
+@case("folder: the map finds drive:/ by the marker, and the project instructions name no folder")
+def _():
+    claude = (WS / "CLAUDE.md").read_text()
+    assert "`_coaching-workspace.md`" in claude and "setup/CONTEXT.md" in claude
+    block = (REPO / "setup" / "project-instructions.md").read_text().split("```")[1]
+    assert "FILL" not in block and "named" not in block, block
+    assert "workspace/CLAUDE.md" in block
+
+
+@case("folder: the map stays within 60 lines")
+def _():
+    n = len((WS / "CLAUDE.md").read_text().splitlines())
+    assert n <= 60, f"CLAUDE.md is {n} lines"
+
+
+@case("folder: first run asks Kyle for his folder's name and writes the marker")
+def _():
+    skill = (WS / "setup" / "SKILL.md").read_text()
+    assert "What did you name your coaching folder in Google Drive?" in skill
+    assert "`_templates/coaching-workspace.md`" in skill and (WS / "_templates" / "coaching-workspace.md").exists()
+
+
+@case("folder: no marker is a setup warning that names it")
+def _():
+    s, d = roots()
+    (d / "_coaching-workspace.md").unlink()
+    r = run(s, d)
+    assert r.ok and any(f.code == "setup" and "_coaching-workspace.md" in f.msg for f in r.findings), errors(r)
+
+
+@case("settings: the fixture's filled settings give no settings findings")
+def _():
+    s, d = roots()
+    r = run(s, d)
+    assert not [f for f in r.findings if f.code.startswith("settings")], [(f.code, f.msg) for f in r.findings]
+
+
+@case("settings: a file fresh from its template warns (not set), never errors")
+def _():
+    s, d = roots()
+    shutil.copy(WS / "_templates" / "settings" / "rates.md", d / "_settings" / "rates.md")
+    r = run(s, d, for_release=True)
+    assert r.ok and "settings-unset" in codes(r, "warning"), errors(r)
+
+
+@case("settings: a missing file is a setup warning")
+def _():
+    s, d = roots()
+    (d / "_settings" / "voice.md").unlink()
+    r = run(s, d)
+    assert r.ok and any(f.code == "setup" and "voice.md" in f.path for f in r.findings), errors(r)
+
+
+@case("settings: a fifth file in _settings/ is an error")
+def _():
+    s, d = roots()
+    (d / "_settings" / "holidays.md").write_text("---\nsetting: holidays\n---\n")
+    assert "stray-file" in codes(run(s, d))
+
+
+@case("settings: a file whose setting: doesn't match its name is an error")
+def _():
+    s, d = roots()
+    set_field(d / "_settings" / "levels.md", "setting", "rates")
+    assert "settings-shape" in codes(run(s, d))
+
+
+@case("settings: the templates are exactly the four files validate expects")
+def _():
+    s, _ = roots()
+    (s / "_templates" / "settings" / "holidays.md").write_text("x")
+    assert "settings-shape" in codes(run(s))
+
+
+@case("settings: a template carrying {{FILL}} is an error — it gets copied into Drive")
+def _():
+    s, _ = roots()
+    p = s / "_templates" / "settings" / "voice.md"
+    p.write_text(p.read_text() + "\n{{FILL: a question}}\n")
+    assert "fill" in codes(run(s))
+
+
+@case("settings: a level Kyle adds becomes valid on a client card")
+def _():
+    s, d = roots()
+    lv = d / "_settings" / "levels.md"
+    lv.write_text(lv.read_text().rstrip("\n") + "\n| `intermediate` | Kyle's own |\n")
+    set_field(d / "clients" / "alex-example" / "client.md", "level", "intermediate")
+    r = run(s, d)
+    assert r.ok, errors(r)
+
+
+@case("settings: changing a level or rate is Kyle's, not Error 500")
+def _():
+    conv = (WS / "_system" / "conventions.md").read_text()
+    section = conv.split("## Error 500 reasons", 1)[1].split("\n## ", 1)[0]
+    assert "a level, a court" not in section and "change a rate" not in section
+    assert "`_settings/CONTEXT.md`" in section
+    rule6 = next(l for l in (WS / "CLAUDE.md").read_text().splitlines() if l.startswith("6. "))
+    assert "rate" not in rule6 and "level" not in rule6, rule6
+
+
+@case("critical list: the marker and _settings/ are on it")
+def _():
+    s, _ = roots()
+    for path in ("drive:/_coaching-workspace.md", "drive:/_settings/"):
+        s2, _ = roots()
+        drop_critical_row(s2, path)
+        r = run(s2)
+        assert any(f.code == "critical-list" and path in f.msg for f in r.findings), (path, errors(r))
 
 
 # ── Deleting: the critical-file list must cover the data layout ─────────────

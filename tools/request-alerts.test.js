@@ -12,7 +12,7 @@ function world() {
     getBlob: () => ({ getDataAsString: () => text }), _text: text });
   const iter = a => { let i = 0; return { hasNext: () => i < a.length, next: () => a[i++] }; };
   W.add = (folderId, name, text, opts = {}) => {
-    W.folders[folderId] = W.folders[folderId] || { requests: [] };
+    W.folders[folderId] = W.folders[folderId] || { requests: [], name: opts.root ? 'Coaching' : '_requests' };
     W.folders[folderId].requests.push(mkFile(name, text, opts.created ?? W.clock, opts.doc ?? true, opts.trashed));
   };
   const allFiles = () => Object.values(W.folders).flatMap(f => f.requests || []);
@@ -22,7 +22,8 @@ function world() {
     MimeType: { GOOGLE_DOCS: 'application/vnd.google-apps.document' },
     DriveApp: { getFolderById: id => {
       const f = W.folders[id]; if (!f) throw new Error('no access');
-      return { getFoldersByName: () => iter(f.requests ? [{ getFiles: () => iter(f.requests) }] : []) }; } },
+      return { getName: () => f.name, getFiles: () => iter(f.requests),
+        getFoldersByName: () => iter(f.requests ? [{ getFiles: () => iter(f.requests) }] : []) }; } },
     DocumentApp: { openById: id => ({ getBody: () => ({ getText: () => allFiles().find(f => f.getId() === id)._text }) }) },
     PropertiesService: { getScriptProperties: () => ({
       getProperty: k => (k in W.props ? W.props[k] : null), setProperty: (k, v) => { W.props[k] = v; },
@@ -109,6 +110,16 @@ ok('client added later: no flood of their old files', () => {
   W.clock = 6000; api.checkRequests();
   assert.ok(W.mail.every(m => !/old1/.test(m.b)));
 });
+ok('whole data folder shared instead of _requests: looks inside it', () => {
+  const { W, api } = load({ Kyle: 'R' }); W.add('R', 'o.md', 'x', { created: 1, root: true });
+  api.setup(); W.mail = []; W.clock = 5000;
+  W.add('R', 'n.md', 'kind: note', { created: 4000 }); api.checkRequests();
+  assert.equal(W.mail.length, 1); assert.match(W.mail[0].b, /Note · Kyle · n\.md/);
+});
+ok('a shared folder that is neither: says to share _requests itself', () => {
+  const { W, api } = load({ Kyle: 'X' }); W.folders.X = { requests: null, name: 'Photos' };
+  api.setup(); assert.match(W.mail[0].b, /share _requests itself/);
+});
 ok('weekly check-in lists every client', () => {
   const { W, api } = load({ Kyle: 'K', Other: 'O' }); W.add('K', 'o.md', 'x', { created: 1 });
   api.weeklyCheckIn(); assert.match(W.mail[0].b, /✓ Kyle — 1 file/); assert.match(W.mail[0].b, /✗ Other — can't open/);
@@ -118,4 +129,4 @@ ok('stopAlerts removes only this script\'s triggers', () => {
   W.triggers.push({ fn: 'somethingElse', getHandlerFunction: () => 'somethingElse' });
   api.setup(); api.stopAlerts(); assert.deepEqual(W.triggers.map(t => t.fn), ['somethingElse']);
 });
-console.log(`\n${n}/10 passed`);
+console.log(`\n${n}/${n} passed`);

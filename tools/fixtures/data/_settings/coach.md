@@ -1,5 +1,5 @@
 ---
-status: active
+setting: coach
 calendar-id: coach@example.com
 timezone: Africa/Johannesburg
 ---

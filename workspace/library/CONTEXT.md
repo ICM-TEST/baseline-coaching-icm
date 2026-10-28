@@ -9,9 +9,9 @@ retires freely, with no involvement from Ross. The shelves live in
 ## Not this?
 
 - About one specific client → `clients/CONTEXT.md`.
-- A rate, a policy, a court's travel time, a level → `_shared/` (rules, Ross's). If
-  Kyle states one of those as fact ("I'm charging 500 now"), that is a structure
-  change — `CLAUDE.md` rule 6 — never a note here. The system must not act on a rule
+- A rate, a policy, a court's travel time, a level → `_settings/CONTEXT.md`. If
+  Kyle states one of those as fact ("I'm charging 500 now"), that is a settings
+  change to confirm there — never a note here. The system must not act on a rule
   it learned from a note.
 
 ## Goal
@@ -21,7 +21,7 @@ What Kyle knows, written once and findable — so it stops evaporating.
 ## Inputs
 
 - **Working:** what Kyle says; `drive:/library/`.
-- **Reference:** `_shared/curriculum.md` (to tag drills and designs by level).
+- **Reference:** `drive:/_settings/levels.md` (to tag drills and designs by level).
 
 ## Outputs
 

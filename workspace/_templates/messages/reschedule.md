@@ -4,7 +4,7 @@ to:
 phone:
 was:                 # YYYY-MM-DD HH:MM
 now:                 # YYYY-MM-DD HH:MM, or "cancelled"
-charged:             # yes | no — the outcome Kyle confirmed under _shared/rates.md
+charged:             # yes | no — the outcome Kyle confirmed under drive:/_settings/rates.md
 channel: whatsapp
 status: draft        # draft | sent
 ---
