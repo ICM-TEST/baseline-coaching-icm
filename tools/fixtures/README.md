@@ -2,9 +2,10 @@
 
 `selftest.py` builds two roots from these:
 
-- **structure** = a copy of `workspace/` with `structure/` laid over it (a filled
-  `_shared/coach.md`) and any remaining `{{FILL}}` replaced.
-- **data** = a copy of `data/`, standing in for a client's Drive folder.
+- **structure** = a copy of `workspace/` with any remaining `{{FILL}}` replaced.
+- **data** = a copy of `data/`, standing in for a client's Drive folder: marked with
+  `_coaching-workspace.md`, settings filled in `_settings/` (invented courts
+  `test-court-a` and `-b`, the ball-colour levels).
 
 Every person here is invented (`alex-example`, `sam-sample`, `jo-placeholder`) and
 every number is a fake `+27 00 …`. **Never put a real client in here** — this

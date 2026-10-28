@@ -20,10 +20,11 @@ and Kyle reading three lines per lesson each morning.
 
 - **Working:** what Kyle says; Google Calendar (`calendar-id` in `drive:/_settings/coach.md`);
   `drive:/clients/<slug>/client.md` and the last entry of `drive:/clients/<slug>/log.md`;
-  `drive:/_release.md` (court sheet only, for the version check).
-- **Reference:** `drive:/_settings/coach.md` (hours, courts, travel, clearances),
-  `drive:/_settings/rates.md` (cancellation policy), `drive:/_settings/voice.md`,
-  `_templates/brief.md`, `_templates/messages/`,
+  `drive:/_release.md` (court sheet only, for the version check); Kyle's settings —
+  `drive:/_settings/coach.md` (hours, courts, travel, clearances),
+  `drive:/_settings/rates.md` (cancellation policy), `drive:/_settings/voice.md`.
+  A setting the task needs reads `(not set)` → `_settings/CONTEXT.md`.
+- **Reference:** `_templates/brief.md`, `_templates/messages/`,
   `_templates/session-note.md`, `_system/schema.md` (calendar linkage),
   `_system/version.md` (version check), `drive:/_index/money.md` (empty until Phase 4).
 

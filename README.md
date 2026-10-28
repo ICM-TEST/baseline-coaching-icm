@@ -14,11 +14,12 @@ repo and the PRD disagree, the ICM invariants win — say so and stop.
 
 | Root | Where | Who reads it | Who changes it |
 |---|---|---|---|
-| **Structure** | `workspace/` in the instance repo, attached to the client's Claude project as knowledge | the client's Claude | Ross only — the client has GitHub **Read** |
-| **Data** | the client's own Google Drive folder, shared with Ross as Editor | the client's Claude (Drive + Docs connectors) and Ross's tools (through rclone) | the client, through their Claude; Ross's tools write only `_index/`, `FILE-MAP.md`, `_release.md` |
+| **Structure** | `workspace/` in the instance repo — **public**, attached to the client's Claude project as knowledge | the client's Claude; anyone, since it's public — so it never holds client data or settings | Ross only — the client is not a collaborator |
+| **Data** | the client's own Google Drive folder, any name, marked by `_coaching-workspace.md`; their settings in `_settings/` | the client's Claude (Drive + Docs connectors); Ross sees `_requests/` (Viewer), and the rest through rclone only if the whole folder is shared | the client, through their Claude; Ross's tools write only `_index/`, `FILE-MAP.md`, `_release.md` |
 
 The routing that ties them together is one short block in the client's project
-instructions (`setup/project-instructions.md`). Storage doesn't matter; routing does.
+instructions (`setup/project-instructions.md`); it names no folder — the first chat
+asks the client for theirs and marks it. Storage doesn't matter; routing does.
 
 ## Layout
 
@@ -42,8 +43,11 @@ Rollback is `git revert` + another release. Turning a module on is one line in
 ## Divergences from the PRD, decided by Ross
 
 - **Structure in GitHub, data in Drive** (17 Oct 2026, after a passing spike). The
-  PRD's Drive-permission lock, `deploy.py` and the manifest are retired; the lock is
-  GitHub's Read role, and the client owns their data.
+  PRD's Drive-permission lock, `deploy.py` and the manifest are retired; the client
+  owns their data.
+- **The lock is a public instance repo** (22 Oct 2026). Claude's GitHub link lets
+  only an org's owners use its private repos, so read-only private access is
+  impossible; a public repo needs none, and only Ross can write it.
 - The client's Claude reads a **snapshot**; Sync is manual and desktop-only, so a
   version check nudges them.
 - Tools live in `tools/`, never in what the client sees.
@@ -61,9 +65,19 @@ Rollback is `git revert` + another release. Turning a module on is one line in
   one plain reason line (what is fixed, never how to get around it), then an offer
   to log a request to update the system (`workspace/CLAUDE.md`; reason lines in
   `workspace/_system/conventions.md` § Error 500 reasons).
+- **The client names their own folder** (28 Oct 2026). First-run setup asks for it
+  and leaves `_coaching-workspace.md` in it; every chat finds the folder by that file.
+- **Settings are the client's** (28 Oct 2026). Rates and policy, hours, courts,
+  travel, clearances, voice and levels live in `drive:/_settings/`, asked for at
+  first-run setup and changed by chat (one confirm; a warning before removing a level
+  or court in use). The repo keeps only their shapes (`workspace/_templates/settings/`);
+  a new *kind* of setting is still Error 500.
 
 ## Status
 
 **Phase 0 + Phase 1 core + safeguarding, template v0.2.0.** `selftest.py` passes
-56/56. Every value only the client can supply is `{{FILL: …}}`; a release refuses
-while any remain. Next: `setup/onboarding.md` for Kyle.
+75/75; `node tools/request-alerts.test.js tools/request-alerts.gs` 12/12. Every
+answer only Ross can supply for an instance is `{{FILL: …}}` (policies, scheduled
+tasks); a release refuses while any remain. The client's own settings read
+`(not set)` until they answer, and never block a release. Next:
+`setup/onboarding.md` for Kyle.

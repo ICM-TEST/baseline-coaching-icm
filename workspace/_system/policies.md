@@ -34,8 +34,8 @@ Every field not collected is a field that cannot leak (POPIA's own principle).
 
 | Tier | Holds | Where | Owner |
 |---|---|---|---|
-| 1 · Structure | contracts, templates, rules — no client data ever | private GitHub repo; Kyle has Read access | Ross |
-| 2 · Data | records, briefs, drafts, anything needed on court | Kyle's Google Drive folder; Ross is an editor | Kyle |
+| 1 · Structure | contracts, templates, rules — no client data, no settings values, ever | public GitHub repo; Kyle reads it through Claude and can't change it | Ross |
+| 2 · Data | records, settings, briefs, drafts, anything needed on court | Kyle's Google Drive folder | Kyle |
 | 3 · Sensitive artifacts | signed agreements, consent and intake forms, any document with a signature or ID number | the vault — kept off Drive | {{FILL: Kyle or Ross — who keeps the vault, and where}} |
 
 The rule in one line: **if Kyle might need it on court, it's in Drive; if it carries a
@@ -45,7 +45,8 @@ pointer, never the document.
 ## Who can see what
 
 - Kyle can read all of Structure and owns all of Data.
-- Ross can read and write all of Data, as an editor, to maintain it.
+- Ross sees `drive:/_requests/`, shared with him as Viewer. He reads and writes the
+  rest of Data only if Kyle shares the whole folder with him, to maintain it.
   **{{FILL: Kyle's answer to "are you comfortable with Ross reading your notes?" — in his words}}**
 - Nobody else has access. Sharing a file outside the workspace is Kyle's decision, made outside the agent.
 
