@@ -131,8 +131,8 @@ Run by the scheduled task. For each lesson tomorrow:
 1. Phone missing on the record → no draft; add the client to the run's summary as
    "no number" so Kyle sees it.
 2. Otherwise draft from `_templates/messages/reminder.md` in Kyle's voice
-   (`drive:/_settings/voice.md`): day, time, court, and what they'll work on from the
-   client-visible bullets. Nothing from "For Kyle only" or "Flags".
+   (`drive:/_settings/voice.md`, read once for the run): day, time, court, and what they'll work on from the
+   client-visible bullets in the event's description. Nothing from "For Kyle only" or "Flags".
 3. Write to `drive:/01_schedule/messages/YYYY-MM-DD-<slug>.md`.
 4. Tell Kyle in one line: how many drafts are ready, and who has no number.
 
@@ -140,28 +140,34 @@ The calendar invite itself is the other reminder channel — Google sends it, fr
 
 ## 7. Skeleton brief — morning of
 
-Run by the 06:00 task, for each lesson today.
+Run by the 06:00 task, for each lesson today. **A Phase 1 brief is not its own file:** it is that lesson's block on
+the morning court sheet (§ 8), so the whole morning is one Doc written once.
 
 1. Read `client.md` and the **last** `log.md` entry. That is all Phase 1 reads.
-2. Fill `_templates/brief.md` into `drive:/01_schedule/briefs/YYYY-MM-DD-<slug>.md`.
-   `thin: true` — say plainly it's a thin brief.
-3. Copy the client-visible bullets into the event description, **above** the
-   `icm-client:` line. Never change the event's time, attendees or anything else.
+2. Work out the brief in the shape of `_templates/brief.md`: the client-visible bullets, the three Kyle-only lines,
+   the flags. Hold it for § 8. Write nothing to `drive:/01_schedule/briefs/` — that folder is for the full briefs of
+   Phase 2.
+3. Copy the client-visible bullets into the event description, **above** the `icm-client:` line. Never change the
+   event's time, attendees or anything else.
 4. Flags = medical extract, any `may-not-collect` name, anything open in the log.
 
 ## 8. Morning court sheet — 06:00
 
-Into `drive:/01_schedule/court-sheets/YYYY-MM-DD.md`, and the same text as the task's reply to Kyle.
+Into `drive:/01_schedule/court-sheets/YYYY-MM-DD.md`, created **once**, after every lesson's brief is worked out, with
+the whole text in that one create. The same text is the task's reply to Kyle. Never create it empty and add to it.
 
 - Nothing on today → "Nothing on today." Four words, not an empty report.
 - Otherwise, in order: **three lines per lesson, maximum** —
-  1. time · name · court (· "new" if `status: trial`)
+  1. time · name · court (· "new" if `status: trial`) (· "thin" while the brief is thin)
   2. today, from the brief
   3. flags: medical extract, `may-not-collect`, "no consent to film" if relevant, owed money once Phase 4 is live
 - Travel: one line between lessons only where the gap is tight.
 - Clearances: one line for anything in `drive:/_settings/coach.md` expiring within 60 days or expired.
 - Version: read `drive:/_release.md`; if it is newer than `_system/version.md`, add the
   one-line update nudge from `_system/version.md`. Last line of the sheet.
+
+Drive calls for a morning with *n* lessons: two reads per lesson, `coach.md` and `_release.md` once each, and one
+create. Nothing is read twice — a client with two lessons today is read once.
 
 ## When it doesn't fit
 

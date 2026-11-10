@@ -14,7 +14,7 @@ Both need the Google Drive, Google Docs and Google Calendar connectors on Kyle's
 > Read workspace/CLAUDE.md, then workspace/01_schedule/CONTEXT.md and
 > workspace/01_schedule/SKILL.md. Follow SKILL.md §7 (skeleton brief) for every
 > lesson on today's calendar, then §8 (morning court sheet), including the version
-> check. Do not create, move or delete any calendar event; the only calendar change
+> check. Write one file only: the court sheet, created once with every lesson in it. Do not create, move or delete any calendar event; the only calendar change
 > allowed is adding the brief's client-visible bullets to an existing event's
 > description, above its `icm-client:` line. Reply with the court sheet text only —
 > three lines per lesson at most, or "Nothing on today."

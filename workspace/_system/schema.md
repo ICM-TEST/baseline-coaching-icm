@@ -72,7 +72,8 @@ this workspace a contract is a `CONTEXT.md`.
 
 ## Brief — `drive:/01_schedule/briefs/YYYY-MM-DD-<slug>.md`
 
-Template: `_templates/brief.md`.
+Template: `_templates/brief.md`. In Phase 1 the skeleton brief is not a file: it is the lesson's block on the court
+sheet (`01_schedule/SKILL.md` § 7), in this template's shape. Files land here from Phase 2.
 
 ## Message draft — `drive:/01_schedule/messages/YYYY-MM-DD-<slug>.md`
 

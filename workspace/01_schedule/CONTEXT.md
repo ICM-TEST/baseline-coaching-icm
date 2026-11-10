@@ -37,8 +37,8 @@ and Kyle reading three lines per lesson each morning.
 | A line per booking, move or cancellation | `drive:/clients/<slug>/log.md` |
 | Charged-cancellation stub | `drive:/clients/<slug>/sessions/YYYY-MM-DD.md` |
 | Reminder and reschedule drafts | `drive:/01_schedule/messages/YYYY-MM-DD-<slug>.md` |
-| Skeleton briefs | `drive:/01_schedule/briefs/YYYY-MM-DD-<slug>.md` |
-| Morning court sheet | `drive:/01_schedule/court-sheets/YYYY-MM-DD.md` |
+| Morning court sheet, holding each lesson's skeleton brief | `drive:/01_schedule/court-sheets/YYYY-MM-DD.md` |
+| Full briefs | `drive:/01_schedule/briefs/YYYY-MM-DD-<slug>.md` — none in Phase 1; `02_sessions` writes them |
 
 ## Process
 
@@ -46,7 +46,8 @@ Every workflow — book (and whether a lesson is worth taking), recur, reschedul
 `SKILL.md`. Two of them run on a timer, as scheduled tasks inside Kyle's coaching
 project: the 06:00 court sheet and the evening reminder drafts.
 
-Phone budget: four Drive reads per task. Calendar reads don't count; they're free.
+Phone budget: four Drive reads per task. Calendar reads don't count; they're free. The two timed tasks run without
+Kyle's phone, so their budget is per lesson: two reads, and one create for the whole morning (`SKILL.md` § 8).
 
 ## Human check
 
