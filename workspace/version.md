@@ -1,6 +1,6 @@
 ---
-version: 0.2.0
-released: 2026-10-17
+version: 0.3.0
+released: 2026-11-10
 ---
 
 # Structure version
@@ -18,3 +18,4 @@ Asked "what version is this?" → say the `version:` above.
 ## What changed
 
 - 0.2.0 (2026-10-17) — Structure and data split: structure in this repo, data in the coach's Drive.
+- 0.3.0 (2026-11-10): Booking and one Doc per player; Error 500 for anything else; system changes go to the system provider
