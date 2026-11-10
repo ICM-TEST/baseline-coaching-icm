@@ -1,37 +1,33 @@
 # _system — the engine
 
-The rules every other folder obeys: names, record shapes, allowed values, policies,
-which modules are live, and which structure version this is. The coach's agent reads here
-and never writes anywhere in Structure.
+The rules every other folder obeys: names, record shapes, allowed values and
+policies. The agent reads here and never writes anywhere in Structure.
 
 ## Not this?
 
-- A rate, a court, a level, the coach's voice → `_settings/CONTEXT.md` (The coach's values, in his Drive).
-- A client's record → `clients/CONTEXT.md`.
+- A rate, a court, a level → `_settings/CONTEXT.md` (the coach's values, in the coach's Drive).
+- A player's file → `players/CONTEXT.md`.
 
 ## Goal
 
-Every record in `drive:/` conforms to `schema.md`, and the coach is never silently running
-an old version of the structure.
+Every file in `drive:/` conforms to `schema.md`.
 
 ## Inputs
 
-- **Reference:** `conventions.md`, `schema.md`, `policies.md`, `modules.yml`; `version.md` at the top of `workspace/`.
-- **Working:** `drive:/_release.md`, for the version check only.
+- **Reference:** `conventions.md`, `schema.md`, `policies.md`; `version.md` at the top of `workspace/`.
 
 ## Outputs
 
-None from the coach's agent. Ross's tools (outside this snapshot) write
-`drive:/_index/*`, `drive:/FILE-MAP.md` and `drive:/_release.md`.
+None. Nothing in this folder is ever written by the agent, and the system provider
+writes nothing in `drive:/`.
 
 ## Process
 
 | Job | How |
 |---|---|
-| Version check | `version.md` (top of `workspace/`) § The version check — once a day, in the morning court sheet |
-| Anything else here | Ross's, from his own machine |
+| "What version is this?" | read `version.md` and say it |
+| A change to anything here | the system provider's — `CLAUDE.md` rule 4 |
 
 ## Human check
 
-Ross reads `drive:/_requests/` on the settling-curve cadence: daily in weeks 1–4,
-twice weekly to week 12, weekly after that.
+The system provider changes Structure and tells the coach when to press Sync.

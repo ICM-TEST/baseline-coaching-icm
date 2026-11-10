@@ -1,7 +1,5 @@
----
 created: YYYY-MM-DD
 structure-version: X.Y.Z
----
 
 # The coaching workspace
 

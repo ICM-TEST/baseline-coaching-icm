@@ -5,11 +5,10 @@ Every write follows `_system/conventions.md` § Writing to Drive.
 
 ## Change a value
 
-"My private rate is 450 now", "Saturday I finish at 1", "first aid renewed till
-March 2028".
+"My private rate is 450 now", "Saturday I finish at 1", "24 hours' notice, not 12".
 
 1. Read the one file with Drive for the exact current line.
-2. Confirm once, old and new in his words: "Change your private 60-minute rate from
+2. Confirm once, old and new in the coach's words: "Change your private 60-minute rate from
    R400 to R450?" Wait for yes.
 3. Replace that one whole line with Docs. One line per confirm; a change that spans
    two lines (a new policy and its table rows) is two confirms, policy first.
@@ -24,33 +23,31 @@ March 2028".
    make it from the name (`kelvin-grove-3`) and say it in the confirm.
 3. Replace that last row with itself plus the new row — one replace.
 4. A new court with no travel times: ask once, in the same read-back, how far it is
-   from his other courts. No answer → leave it; booking asks when it needs it.
+   from the other courts. No answer → leave it; booking asks when it needs it.
 
 ## Remove or rename a level or a court
 
-Clients point to these by slug, so check before anything moves:
+Players point to these by slug, so check before anything moves:
 
-1. Search `drive:/clients/` for cards with `level: <slug>` (or `court: <slug>`), or
-   use `drive:/_index/roster.md` if it lists them.
+1. Search `drive:/players/` for files containing `level: <slug>` (or `court: <slug>`).
 2. None → confirm once, then replace the row: with the new slug (rename), or with
    nothing, its line break included (remove).
-3. Some → warn first: "⚠️ 3 clients are on *green-ball* — Sarah, Ethan and Lebo.
-   Remove it anyway? Their cards keep the old level until you change them." Only a
-   clear yes changes it. Renaming → offer, in the same message, to change those cards
-   too — one confirm covers all of them, one line replaced per card, one `log.md`
-   entry each.
+3. Some → warn first: "⚠️ 3 players are on *green-ball* — Sarah, Ethan and Lebo.
+   Remove it anyway? Their files keep the old level until you change them." Only a
+   clear yes changes it. Renaming → offer, in the same message, to change those files
+   too — one confirm covers all of them, one line replaced per file.
 
 ## A value that isn't set
 
 A task needs a value that reads `(not set)` — a cancellation outcome, a court's
 travel time, Saturday availability.
 
-1. Ask the coach that one thing, in one line, and carry on with his answer.
+1. Ask the coach that one thing, in one line, and carry on with the answer.
 2. Save it as a change (§ Change a value) — the question is the confirm; don't ask
    twice.
-3. He doesn't know → do the task without it, say what you assumed, leave it unset.
+3. Not known → do the task without it, say what you assumed, leave it unset.
 
 ## What the coach can't change here
 
-The files themselves, their sections and their columns, and the two fixed lines in
-`voice.md` § Never. Asked for one of those → `CLAUDE.md` rule 6.
+The files themselves, their sections and their columns. Asked for one of those →
+`CLAUDE.md` rule 4.

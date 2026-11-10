@@ -5,20 +5,15 @@ released: 2026-10-17
 
 # Structure version
 
-The version of the structure this snapshot holds. Written only by Ross's
-`release.py`; never by hand, never by the coach's agent.
+The version of the structure this snapshot holds. Written only by the system provider's
+release tool; never by hand, never by the agent.
 
-## The version check
+## Updates
 
-`drive:/_release.md` holds the **latest** version Ross has released. If its
-`version:` is newer than this file's, the coach's snapshot is behind. Say so once, in one
-line, the next time you speak to him (the morning court sheet is the usual place):
-
-> System update ready — next time you're at a computer: claude.ai → your coaching
-> project → settings → Sync.
-
-Then carry on normally. Never refuse work because the snapshot is behind, and never
-mention it twice in a day. If `drive:/_release.md` is missing, say nothing.
+The system provider releases a new version and tells the coach. The coach then
+presses Sync at a computer: claude.ai → the coaching project → settings → Sync. There
+is no version check to run, and nothing about versions is ever written to Drive.
+Asked "what version is this?" → say the `version:` above.
 
 ## What changed
 

@@ -1,78 +1,50 @@
 # The workspace — shape, lifecycle, gates
 
-The coaching practice, run by chatting to Claude. A **record library** (the unit is
-a client) inside an **umbrella** (a shared factory plus numbered operating modules),
-split across two roots: **Structure** (this repo, read-only) and **Data** (The coach's
-Drive folder).
+A coaching practice run by chatting to Claude. A **record library** (the unit is a
+player, one Doc each) with one **pipeline** beside it (booking), split across two
+roots: **Structure** (this repo, read-only) and **Data** (the coach's Drive folder).
 
 ## Not this?
 
-To route a specific task, use `CLAUDE.md`. For names and allowed values, use
-`_system/schema.md`.
+To route a task, use `CLAUDE.md`. For names and allowed values, use `_system/schema.md`.
 
 ## Goal
 
-Every lesson is booked once and reminded once, nobody is missed or double-booked, and
-anything the coach knows about a player is written where the next brief will find it.
+Every lesson is booked once at a time that works, nobody is double-booked, and what
+the coach knows about a player is in that player's one file.
 
 ## Shape
 
 | Layer | Where | Who changes it |
 |---|---|---|
-| Map and contracts | `CLAUDE.md`, every `CONTEXT.md` and `SKILL.md` | Ross |
-| Engine | `_system/` | Ross |
-| Types — the stamps | `_templates/` | Ross |
-| Settings — the shapes | `_templates/settings/`, `_settings/` | Ross |
-| Settings — the values | `drive:/_settings/` | The coach, through the agent |
-| Instances | `drive:/clients/<slug>/` | The coach, through the agent |
-| Knowledge | `drive:/library/` | The coach |
-| Module output | `drive:/01_schedule/` | the agent; the coach reads and sends |
-| Change control | `drive:/_requests/` | The coach writes, Ross answers in the file |
-| Unrouted capture | `drive:/_inbox/` | The coach |
-| Generated | `drive:/_index/`, `drive:/FILE-MAP.md` | Ross's scripts only |
-| Release marker | `drive:/_release.md` | Ross's `release.py` only |
+| Map and contracts | `CLAUDE.md`, every `CONTEXT.md` and `SKILL.md` | the system provider |
+| Engine | `_system/` | the system provider |
+| Types — the stamps | `_templates/` | the system provider |
+| Settings — the shapes | `_templates/settings/` | the system provider |
+| Settings — the values | `drive:/_settings/` | the coach, through the agent |
+| Players | `drive:/players/<slug>.md` | the coach, through the agent |
 
 The test for any file: does changing it change what the system **does** (Structure,
-Ross's), or only what it **knows** (Data, the coach's)? Settings are the one split: what
-can be set is Structure; what it is set to is the coach's.
+the system provider's), or only what it **knows** (Data, the coach's)? Settings are
+the one split: what can be set is Structure; what it is set to is the coach's.
 
 ## Data folder
 
 ```
-drive:/                the coaching folder — any name; found by _coaching-workspace.md
+drive:/                     the coaching folder — any name; found by _coaching-workspace.md
 ├─ _coaching-workspace.md   the marker
-├─ _settings/          coach.md · rates.md · voice.md · levels.md
-├─ clients/<slug>/     client.md · log.md · programme.md · sessions/ · agreements/ · incidents/ · output/
-├─ library/            drills/ · programmes/ · courts/ · notes/
-├─ 01_schedule/        briefs/ · messages/ · court-sheets/
-├─ _requests/  _inbox/
-├─ _index/             roster.md · open-items.md · money.md   [generated]
-├─ FILE-MAP.md         [generated]
-└─ _release.md         [Ross]
+├─ _settings/               coach.md · rates.md · levels.md
+└─ players/                 <slug>.md — one Doc per player
 ```
 
-Nothing else belongs at the top of the data folder. A dormant module gets its
-`drive:/0N_<name>/` folder only when it goes live.
+Nothing else belongs in the data folder. The coach owns all of it and shares it with
+nobody; the system provider has no access to it.
 
-## Modules
+## A player's life
 
-| Module | State | Job |
-|---|---|---|
-| `01_schedule/` | **live** | book, recur, reschedule, cancel, remind, court sheet, skeleton brief |
-| `02_sessions/` | dormant — Phase 2 | courtside capture → session note |
-| `03_programmes/` | dormant — Phase 3 | programme designs and progression |
-| `04_money/` | dormant — Phase 4 | lessons delivered, invoices, payments |
-| `05_review/` | dormant — Phase 5 | weekly and term review |
-
-The switch is `_system/modules.yml`. A dormant module's contract says so on its first
-line; an agent never does that module's work.
-
-## A client's life
-
-`trial → active ⇄ paused → dormant → archived`, all as a `status:` change in
-`client.md`. The folder never moves; it is binned only when the coach asks
-(`_system/conventions.md` § Deleting from Drive). Coming back is a flip back
-to `active`.
+`trial → active ⇄ paused → archived`, all as a `status:` change in the player's file.
+The file never moves; it is binned only when the coach asks
+(`_system/conventions.md` § Deleting from Drive).
 
 ## Human gates
 
@@ -80,6 +52,6 @@ to `active`.
 |---|---|
 | Any calendar write — create, move, cancel | confirm the slot or pattern in plain words |
 | A cancellation that involves money | confirm the policy outcome |
-| Any message to a client or parent | send it himself |
-| Archiving a client | confirm once |
-| An incident report | read it and confirm it is accurate |
+| Any change to a setting | confirm old and new once |
+| Archiving or binning a player | confirm once |
+| An incident entry | read it back and confirm it is accurate |

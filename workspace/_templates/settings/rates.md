@@ -6,7 +6,7 @@ currency: ZAR
 # Rates and policy
 
 The only home for what lessons cost and what happens when one doesn't happen.
-Coaching agreements point here; they never restate it. Filled at first-run setup;
+Filled at first-run setup;
 The coach changes any value by chat.
 
 ## Rates
@@ -36,4 +36,4 @@ How the agent applies it — worked out from the policy above, confirmed by the 
 | Rain / court unplayable | (not set) |
 
 When money is involved, the agent states the outcome and the coach confirms it before
-anything is logged.
+anything is noted.

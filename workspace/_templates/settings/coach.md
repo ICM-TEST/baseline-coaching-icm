@@ -11,7 +11,7 @@ chat. A value still `(not set)` is asked for the first time a task needs it.
 
 ## Availability
 
-The hours clients can book the coach. Booking never offers a slot outside them.
+The hours players can book the coach. Booking never offers a slot outside them.
 
 | Day | From | To |
 |---|---|---|
@@ -21,7 +21,7 @@ The hours clients can book the coach. Booking never offers a slot outside them.
 
 ## Courts
 
-A client's `court:` must be a slug from this table.
+A player's `court:` must be a slug from this table.
 
 | Slug | Name | Where | Notes |
 |---|---|---|---|
@@ -37,14 +37,3 @@ doesn't leave this gap.
 | (not set) | |
 
 Same court, back-to-back: (not set) minutes of buffer.
-
-## Clearances
-
-The morning court sheet carries one line for anything expiring within 60 days, and a
-line every day once it has expired.
-
-| Clearance | Expires | Where the certificate is |
-|---|---|---|
-| Coaching qualification | (not set) | (not set) |
-| First aid | (not set) | (not set) |
-| Police clearance / working with children | (not set) | (not set) |
