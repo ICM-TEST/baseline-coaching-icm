@@ -1,11 +1,11 @@
-# Kyle's scheduled tasks — Ross only
+# The coach's scheduled tasks — Ross only
 
-Two scheduled tasks, created **once, inside Kyle's coaching project** on his Claude
+Two scheduled tasks, created **once, inside the coaching project** on his Claude
 account, so they see the repo snapshot and the project instructions. They run in the
 cloud with his phone off. Each run starts with no memory, so each prompt stands alone.
 The spike (16–17 Oct) confirmed a scheduled task in the project can read the repo.
 
-Both need the Google Drive, Google Docs and Google Calendar connectors on Kyle's account.
+Both need the Google Drive, Google Docs and Google Calendar connectors on the coach's account.
 
 ---
 

@@ -1,6 +1,6 @@
 """drive.py — reach the client's Drive folder through rclone.   Ross only.
 
-Kyle's records are Google Docs (his phone can edit a Doc, not a plain file). On a
+The coach's records are Google Docs (his phone can edit a Doc, not a plain file). On a
 computer a Doc is only a link stub, so the tools never read the Drive-for-Desktop
 copy of a record. Instead:
 
@@ -11,7 +11,7 @@ copy of a record. Instead:
              plain .md files — the agent only reads those, never edits them.
 
 Set up once (setup/onboarding.md § 1b): an rclone remote whose root is the data
-folder, e.g. `kyle:`. Then pass `--from-drive kyle:` to validate, build-indexes or
+folder, e.g. `client:`. Then pass `--from-drive client:` to validate, build-indexes or
 release. ICM_RCLONE overrides the rclone command (the selftest uses a fake).
 Stdlib only.
 """
@@ -26,7 +26,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-# Files Kyle's agent edits in place. They must be Docs, or the phone can't change them.
+# Files the coach's agent edits in place. They must be Docs, or the phone can't change them.
 EDITED = re.compile(r"^clients/[^/]+/(client\.md|log\.md|programme\.md|incidents/[^/]+\.md)$")
 
 
@@ -85,7 +85,7 @@ def normalise(root: Path) -> list[tuple[str, str, str, str]]:
         rel = p.relative_to(root).as_posix()
         if EDITED.match(rel) and rel not in docs:
             found.append(("warning", "not-a-doc", rel,
-                          "plain file, not a Google Doc — Kyle's phone can't edit it; open it in Drive → Open with Google Docs, keep the Doc"))
+                          "plain file, not a Google Doc — the coach's phone can't edit it; open it in Drive → Open with Google Docs, keep the Doc"))
     return found
 
 

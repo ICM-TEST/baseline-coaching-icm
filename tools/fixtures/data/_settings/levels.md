@@ -4,8 +4,8 @@ setting: levels
 
 # Levels
 
-The levels Kyle groups players into. A client's `level:` must be a slug from this
-table. Starts with the ball colours; Kyle keeps, changes or replaces them at
+The levels the coach groups players into. A client's `level:` must be a slug from this
+table. Starts with the ball colours; the coach keeps, changes or replaces them at
 first-run setup, and adds or removes one by chat.
 
 | Level | Who it's for |

@@ -6,15 +6,15 @@ The how-to under `setup/CONTEXT.md`. Runs only while working in `setup/`.
 
 - No Doc titled `_coaching-workspace.md` turns up when a chat looks for the data
   folder (`CLAUDE.md` § Two roots), or
-- Kyle says "set up my workspace", or
+- The coach says "set up my workspace", or
 - a task finds a top-level data folder or a settings file missing. Then: finish
   nothing else first — say in one line that the workspace needs setting up, and ask
   to do it now. The folder is already marked → start at § 3.
 
-## 1 · Find Kyle's folder
+## 1 · Find the coach's folder
 
 1. Ask: "What did you name your coaching folder in Google Drive?"
-2. Search Drive for a **folder** with exactly that title, owned by Kyle.
+2. Search Drive for a **folder** with exactly that title, owned by the coach.
    - One → step 3.
    - None → "I can't find a folder called *<name>*. Create it now?" On yes, create
      it at the top of his Drive and go to § 2 — that yes was the confirm. Anything
@@ -24,14 +24,14 @@ The how-to under `setup/CONTEXT.md`. Runs only while working in `setup/`.
 3. Confirm once: "Set up your coaching workspace in *<name>*?" Wait for yes. Never use
    a different folder that "looks right".
 
-Two or more `_coaching-workspace.md` Docs already exist → don't pick. Tell Kyle in one
+Two or more `_coaching-workspace.md` Docs already exist → don't pick. Tell the coach in one
 line which folders hold one, ask which is his coaching folder, and write a
 `drive:/_inbox/` note for Ross naming the others. Never bin one yourself.
 
 ## 2 · Mark it
 
 Create `drive:/_coaching-workspace.md` in that folder as a Doc from `_templates/coaching-workspace.md`:
-today's date, and the version from `_system/version.md`. From now on every chat finds
+today's date, and the version from `version.md`. From now on every chat finds
 the folder by this file. If it can't be created, say so in one line and stop — a
 folder that can't be found again can't be used.
 
@@ -55,7 +55,7 @@ here — Ross's scripts write them.
 ## 4 · Settings
 
 For each file in `_templates/settings/` that isn't in `drive:/_settings/` yet, ask
-its questions below, then create it as a Doc from that template with Kyle's answers
+its questions below, then create it as a Doc from that template with the coach's answers
 in place of `(not set)`. Never touch a settings file that already exists — changes
 go through `_settings/CONTEXT.md`.
 
@@ -76,7 +76,7 @@ order. A skip, or "don't know", leaves `(not set)`; never ask it again here.
 | 9 | `voice.md` | "Paste or forward three to five messages you've sent parents — a reminder, a reschedule, a late cancellation. And is there anything you never say?" Write § The pattern from them in a few lines (greeting, length, sign-off, emoji); put up to five in § Examples with every name taken out. |
 
 Where certificates are kept (`coach.md` § Clearances) is not asked here; it stays
-`(not set)` until Kyle mentions it.
+`(not set)` until the coach mentions it.
 
 Create each file as soon as its last question is answered, so a chat that ends
 halfway keeps what was said. The next run asks only for files still missing.
@@ -87,7 +87,7 @@ halfway keeps what was said. The next run asks only for files still missing.
    Docs — `_system/conventions.md` § Writing to Drive). Don't block on it.
 2. Write `drive:/_inbox/YYYY-MM-DD-setup.md`: the folder's name, one line per folder
    and settings file created, how many settings are still `(not set)`, the structure
-   version from `_system/version.md`, and whether Docs is connected.
+   version from `version.md`, and whether Docs is connected.
 3. Read back in one line: "Your workspace is set up in *<name>* — ready for your
    first client." If any settings were skipped, a second line: how many, and that
    you'll ask when they come up. If Docs isn't connected, a last line: "Turn on

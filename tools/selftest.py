@@ -17,6 +17,7 @@ import os
 import importlib.util
 import re
 import shutil
+import shlex
 import subprocess
 import sys
 import tempfile
@@ -62,7 +63,7 @@ def case(name):
 
 def roots() -> tuple[Path, Path]:
     """Fresh (structure, data) in a temp folder: structure filled, data from fixtures
-    (a marked folder with Kyle's settings filled in)."""
+    (a marked folder with the coach's settings filled in)."""
     tmp = Path(tempfile.mkdtemp(prefix="icm-selftest-"))
     s, d = tmp / "workspace", tmp / "data"
     shutil.copytree(WS, s)
@@ -140,7 +141,7 @@ def _():
 
 @case("structure version is X.Y.Z")
 def _():
-    assert validate.parse_version(validate.version_of(WS / "_system" / "version.md"))
+    assert validate.parse_version(validate.version_of(WS / "version.md"))
 
 
 ERROR_500 = (
@@ -164,7 +165,7 @@ def _():
     text = (WS / "_system" / "conventions.md").read_text()
     assert "## Error 500 reasons" in text, "conventions.md has no § Error 500 reasons"
     section = text.split("## Error 500 reasons", 1)[1].split("\n## ", 1)[0]
-    rows = [l for l in section.splitlines() if l.startswith("| ") and not l.startswith("| Kyle")]
+    rows = [l for l in section.splitlines() if l.startswith("| ") and not l.startswith("| The coach")]
     assert len(rows) >= 3, f"expected a reason row per kind, found {len(rows)}"
     assert "Ross" not in section, "a reason line must not say who set it"
 
@@ -389,14 +390,14 @@ def _():
     assert "vocab" in codes(run(s, d))
 
 
-@case("vocab: level not in Kyle's levels (drive:/_settings/levels.md) is an error")
+@case("vocab: level not in the coach's levels (drive:/_settings/levels.md) is an error")
 def _():
     s, d = roots()
     set_field(d / "clients" / "alex-example" / "client.md", "level", "purple-ball")
     assert "vocab" in codes(run(s, d))
 
 
-@case("vocab: court not in Kyle's _settings/coach.md is an error")
+@case("vocab: court not in the coach's _settings/coach.md is an error")
 def _():
     s, d = roots()
     set_field(d / "clients" / "alex-example" / "client.md", "court", "wimbledon")
@@ -441,7 +442,7 @@ def marker(d: Path, version: str):
 @case("version: same version released → no version finding")
 def _():
     s, d = roots()
-    marker(d, validate.version_of(s / "_system" / "version.md"))
+    marker(d, validate.version_of(s / "version.md"))
     r = run(s, d)
     assert not {"unreleased", "repo-behind"} & set(codes(r, "warning")), r.findings
 
@@ -492,14 +493,16 @@ def _():
 @case("release bumps version.md, commits, writes the marker — and then validates clean")
 def _():
     repo, d = git_repo()
-    old = validate.version_of(repo / "workspace" / "_system" / "version.md")
+    old = validate.version_of(repo / "workspace" / "version.md")
     new = do_release(repo, d, part="minor", note="Adds blackout dates")
     assert new == release.bump(old, "minor")
-    assert validate.version_of(repo / "workspace" / "_system" / "version.md") == new
+    assert validate.version_of(repo / "workspace" / "version.md") == new
     assert validate.version_of(d / "_release.md") == new
-    assert "Adds blackout dates" in (repo / "workspace" / "_system" / "version.md").read_text()
+    assert "Adds blackout dates" in (repo / "workspace" / "version.md").read_text()
     log = subprocess.run(["git", "-C", str(repo), "log", "-1", "--format=%s"], capture_output=True, text=True).stdout
-    assert log.strip() == f"Release v{new}", log
+    assert log.strip() == f"Release v{new}: Adds blackout dates", log
+    tags = subprocess.run(["git", "-C", str(repo), "tag", "--list"], capture_output=True, text=True).stdout.split()
+    assert tags == [f"v{new}"], tags                       # every release is tagged, as in every client repo
     r = run(repo / "workspace", d, for_release=True)
     assert r.ok and not {"unreleased", "repo-behind"} & set(codes(r, "warning")), errors(r)
 
@@ -551,7 +554,7 @@ def _():
     assert not (d / "_release.md").exists()
 
 
-# ── Kyle's folder and settings: found by a marker, values in his Drive ───────
+# ── the coach's folder and settings: found by a marker, values in his Drive ───────
 @case("folder: the map finds drive:/ by the marker, and the project instructions name no folder")
 def _():
     claude = (WS / "CLAUDE.md").read_text()
@@ -567,7 +570,7 @@ def _():
     assert n <= 60, f"CLAUDE.md is {n} lines"
 
 
-@case("folder: first run asks Kyle for his folder's name and writes the marker")
+@case("folder: first run asks the coach for his folder's name and writes the marker")
 def _():
     skill = (WS / "setup" / "SKILL.md").read_text()
     assert "What did you name your coaching folder in Google Drive?" in skill
@@ -634,17 +637,17 @@ def _():
     assert "fill" in codes(run(s))
 
 
-@case("settings: a level Kyle adds becomes valid on a client card")
+@case("settings: a level the coach adds becomes valid on a client card")
 def _():
     s, d = roots()
     lv = d / "_settings" / "levels.md"
-    lv.write_text(lv.read_text().rstrip("\n") + "\n| `intermediate` | Kyle's own |\n")
+    lv.write_text(lv.read_text().rstrip("\n") + "\n| `intermediate` | The coach's own |\n")
     set_field(d / "clients" / "alex-example" / "client.md", "level", "intermediate")
     r = run(s, d)
     assert r.ok, errors(r)
 
 
-@case("settings: changing a level or rate is Kyle's, not Error 500")
+@case("settings: changing a level or rate is the coach's, not Error 500")
 def _():
     conv = (WS / "_system" / "conventions.md").read_text()
     section = conv.split("## Error 500 reasons", 1)[1].split("\n## ", 1)[0]
@@ -734,7 +737,7 @@ def as_drive(d: Path) -> Path:
 
 @contextlib.contextmanager
 def fake_rclone(fake: Path, fail=False):
-    env = {"ICM_RCLONE": f"{sys.executable} {TOOLS / 'fixtures' / 'fake-rclone.py'}",
+    env = {"ICM_RCLONE": shlex.join([sys.executable, str(TOOLS / "fixtures" / "fake-rclone.py")]),
            "FAKE_DRIVE": str(fake), **({"FAKE_RCLONE_FAIL": "1"} if fail else {})}
     old = {k: os.environ.get(k) for k in (*env, "FAKE_RCLONE_FAIL")}
     os.environ.update(env)

@@ -5,7 +5,7 @@ Checks the two roots of an ICM instance and changes nothing:
 
   Structure  the repo's workspace/ — every path a contract names must resolve,
              data paths must be written drive:/…, placeholders are flagged.
-  Data       the client's Drive folder — layout, the folder marker, Kyle's
+  Data       the client's Drive folder — layout, the folder marker, the coach's
              settings, record shapes, closed vocabularies, reserved names, the
              release marker. Records are Google Docs, so read it with
              --from-drive (tools/drive.py); --data is for a local plain-text
@@ -13,7 +13,7 @@ Checks the two roots of an ICM instance and changes nothing:
 
     python3 tools/validate.py                          # structure only
     python3 tools/validate.py --data "<drive folder>"  # both roots, a local copy
-    python3 tools/validate.py --from-drive kyle:       # both roots, live from Drive (rclone)
+    python3 tools/validate.py --from-drive client:       # both roots, live from Drive (rclone)
     python3 tools/validate.py --data … --for-release   # {{FILL}} becomes an error
     python3 tools/validate.py --data … --json
 
@@ -39,7 +39,7 @@ FILL = "{{FILL"
 
 # ── Data layout (must match workspace/CONTEXT.md § Data folder) ──────────────
 DATA_DIRS = {"_settings", "clients", "library", "_requests", "_inbox", "_index"}   # + live module folders
-MARKER = "_coaching-workspace.md"          # how Kyle's agent finds the folder
+MARKER = "_coaching-workspace.md"          # how the coach's agent finds the folder
 DATA_FILES = {MARKER, "FILE-MAP.md", "_release.md"}
 SETTINGS = {"coach.md", "rates.md", "voice.md", "levels.md"}   # = workspace/_templates/settings/
 UNSET = "(not set)"
@@ -266,7 +266,7 @@ def check_critical(r: Report):
     listed = table_first_column(conv.read_text(encoding="utf-8"), "Critical in Drive") if conv.exists() else set()
     for path in sorted(critical_required(r.structure) - listed):
         r.add("error", "critical-list", "_system/conventions.md",
-              f"`{path}` is not in § Critical in Drive — Kyle's agent would bin it without a warning")
+              f"`{path}` is not in § Critical in Drive — the coach's agent would bin it without a warning")
 
 
 def check_structure(r: Report, for_release: bool):
@@ -282,16 +282,16 @@ def check_structure(r: Report, for_release: bool):
             r.add("error", "missing-module", mod, "module in modules.yml has no CONTEXT.md")
         if (spec or {}).get("state") == "live" and not (s / mod / "SKILL.md").exists():
             r.add("error", "missing-module", mod, "live module has no SKILL.md")
-    r.structure_version = version_of(s / "_system" / "version.md")
+    r.structure_version = version_of(s / "version.md")
     if not parse_version(r.structure_version):
-        r.add("error", "version", "_system/version.md", f"version '{r.structure_version}' is not X.Y.Z")
+        r.add("error", "version", "version.md", f"version '{r.structure_version}' is not X.Y.Z")
     shapes = {p.name for p in (s / "_templates" / "settings").glob("*.md")}
     if shapes != SETTINGS:
         r.add("error", "settings-shape", "_templates/settings/",
               f"expected {sorted(SETTINGS)}, found {sorted(shapes)} — validate.py and the templates disagree")
     for p in sorted((s / "_templates").rglob("*.md")):
         if FILL in p.read_text(encoding="utf-8"):
-            r.add("error", "fill", rel(s, p), f"a template is copied into Kyle's Drive — use {UNSET}, never {{{{FILL}}}}")
+            r.add("error", "fill", rel(s, p), f"a template is copied into the coach's Drive — use {UNSET}, never {{{{FILL}}}}")
     targets = [s / "_system" / "policies.md"]
     if s == STRUCTURE:   # the Ross-only setup files that carry instance answers
         targets += [REPO / "setup" / "project-instructions.md", REPO / "setup" / "scheduled-tasks.md"]
@@ -373,7 +373,7 @@ def check_layout(r: Report):
 
 
 def check_settings(r: Report):
-    """drive:/_settings/ — Kyle's values in Ross's shapes. Unset values are his to give
+    """drive:/_settings/ — the coach's values in Ross's shapes. Unset values are his to give
     (the agent asks when a task needs one), so they warn and never block a release."""
     folder = r.data / "_settings"
     if not folder.is_dir():
@@ -397,9 +397,9 @@ def check_settings(r: Report):
         if fm.get("setting") != name[:-3]:
             r.add("error", "settings-shape", rel(r.data, p), f"setting: '{fm.get('setting')}' but the file is {name}")
         if (n := p.read_text(encoding="utf-8").count(UNSET)):
-            r.add("warning", "settings-unset", rel(r.data, p), f"{n} value(s) still {UNSET} — Kyle's agent asks when one is needed")
+            r.add("warning", "settings-unset", rel(r.data, p), f"{n} value(s) still {UNSET} — the coach's agent asks when one is needed")
         if FILL in p.read_text(encoding="utf-8"):
-            r.add("error", "fill", rel(r.data, p), f"{{{{FILL}}}} in Kyle's settings — an unanswered value is {UNSET}")
+            r.add("error", "fill", rel(r.data, p), f"{{{{FILL}}}} in the coach's settings — an unanswered value is {UNSET}")
 
 
 def check_clients(r: Report):
@@ -440,9 +440,9 @@ def check_clients(r: Report):
         if fm.get("client") and fm["client"] != rec.name:
             r.add("error", "slug-mismatch", cp, f"client: '{fm['client']}' but the folder is '{rec.name}'")
         if fm.get("level") and levels and fm["level"] not in levels:
-            r.add("error", "vocab", cp, f"level: '{fm['level']}' is not in Kyle's levels (_settings/levels.md) — his agent offers to add it")
+            r.add("error", "vocab", cp, f"level: '{fm['level']}' is not in the coach's levels (_settings/levels.md) — his agent offers to add it")
         if fm.get("court") and courts and fm["court"] not in courts:
-            r.add("error", "vocab", cp, f"court: '{fm['court']}' is not a court in Kyle's settings (_settings/coach.md)")
+            r.add("error", "vocab", cp, f"court: '{fm['court']}' is not a court in the coach's settings (_settings/coach.md)")
         for key in ("dob", "started", "media-consent-date"):
             if fm.get(key) and not DATE_RE.match(str(fm[key])):
                 r.add("error", "date", cp, f"{key}: '{fm[key]}' is not YYYY-MM-DD")
@@ -575,7 +575,7 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Check the structure and data roots of an ICM instance.")
     ap.add_argument("--structure", default=str(STRUCTURE), help="structure root (default: this repo's workspace/)")
     src = ap.add_mutually_exclusive_group()
-    src.add_argument("--from-drive", metavar="REMOTE", help="rclone remote whose root is the data folder, e.g. kyle:")
+    src.add_argument("--from-drive", metavar="REMOTE", help="rclone remote whose root is the data folder, e.g. client:")
     src.add_argument("--data", help="a local plain-text copy of the data folder")
     ap.add_argument("--for-release", action="store_true", help="placeholders are errors")
     ap.add_argument("--json", action="store_true")

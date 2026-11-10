@@ -2,7 +2,7 @@
 date: 2026-10-10
 status: open
 ---
-## Kyle asked for
+## The coach asked for
 Book three players into one lesson.
 ## What he was trying to do
 Run a small group clinic.

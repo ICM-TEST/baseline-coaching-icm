@@ -1,6 +1,6 @@
 # Onboarding a client instance — Ross only
 
-From this template to a working system on someone's phone. Written for Kyle; the
+From this template to a working system on someone's phone. Written for the coach; the
 same steps serve every later client. About an hour of yours, plus fifteen minutes of
 the client's on their phone for first-run setup.
 
@@ -16,7 +16,7 @@ Anyone can read the structure — never client data, and never the client's sett
    organizations → New organization → Free). Settle its name before go-live:
    renaming it breaks every client's project link.
 2. Create the instance from the template: in the org, **New repository** → name it
-   for the client (e.g. `kyle-coaching`) → **Public**. On your computer:
+   for the client (e.g. `client-coaching`) → **Public**. On your computer:
    ```
    git clone <instance-url> && cd <instance>
    git remote add template <template-url>
@@ -51,18 +51,18 @@ here — their Claude asks for those at first-run setup and keeps them in their 
    Once it is shared, they reach it through **rclone**, once per client:
    ```
    brew install rclone                      # first client only
-   rclone config create kyle drive scope=drive root_folder_id=<folder ID>
+   rclone config create client drive scope=drive root_folder_id=<folder ID>
    ```
-   `kyle` is the remote's name — use one per client. The folder ID is the last part
+   `client` is the remote's name — use one per client. The folder ID is the last part
    of the folder's Drive URL, after `/folders/`. A browser opens: sign in with the
-   Google account the folder is shared with, and allow. Check with `rclone lsf kyle:`.
+   Google account the folder is shared with, and allow. Check with `rclone lsf client:`.
 
 ## 4 · Release
 
 ```
-python3 tools/release.py --from-drive kyle: --note "First release"
+python3 tools/release.py --from-drive client: --note "First release"
 ```
-Runs selftest and `validate.py --for-release`, stamps `workspace/_system/version.md`,
+Runs selftest and `validate.py --for-release`, stamps `workspace/version.md`,
 commits, pushes, and writes `drive:/_release.md`.
 
 ## 5 · Their Claude
@@ -114,8 +114,8 @@ On their account, at claude.ai on a computer:
 ## Every week after
 
 ```
-python3 tools/validate.py --from-drive kyle:        # what state is the book in?
-python3 tools/build-indexes.py --from-drive kyle:   # roster, open items, file map
+python3 tools/validate.py --from-drive client:        # what state is the book in?
+python3 tools/build-indexes.py --from-drive client:   # roster, open items, file map
 ```
 Both need the whole folder shared (§ 3.3). Read `drive:/_requests/` on the
 settling-curve cadence (PRD §4.7) — and whenever a request alert arrives (below).

@@ -5,9 +5,9 @@ divergences are marked ◆ so they don't read as drift.
 
 ## Two roots ◆
 
-- **Structure** is this repo's `workspace/`, read-only, attached to Kyle's Claude
+- **Structure** is this repo's `workspace/`, read-only, attached to the coach's Claude
   project as knowledge. Paths in Structure are written plainly: `_templates/client/client.md`.
-- **Data** is Kyle's Google Drive folder. Paths in Data are written with the prefix
+- **Data** is the coach's Google Drive folder. Paths in Data are written with the prefix
   `drive:/`: `drive:/clients/ethan-moloi/log.md`.
 - A contract names every path it reads or writes in one of those two forms, and
   nothing else. Ross's `validate.py` checks that each one resolves in the right root.
@@ -16,7 +16,7 @@ divergences are marked ◆ so they don't read as drift.
 
 - Folders and files: lowercase, hyphenated — `kelvin-grove-3.md`.
 - Client slugs: `firstname-lastname`, stable for life — `ethan-moloi`. A second
-  person with the same name gets a distinguishing suffix Kyle chooses, never a number.
+  person with the same name gets a distinguishing suffix the coach chooses, never a number.
 - Dated files: `YYYY-MM-DD.md` or `YYYY-MM-DD-short-slug.md` — the date is the sort order.
 - Underscore prefix (`_system/`, `drive:/_requests/`) means machinery or a channel, not live work.
 - Numbered prefix (`01_schedule/`) means an operating module. Its contract lives in
@@ -63,7 +63,7 @@ is, because the agent cannot open it later.
 
 ## Writing to Drive ◆
 
-Kyle's phone can edit a Google Doc but not a plain file. So every file you write in
+The coach's phone can edit a Google Doc but not a plain file. So every file you write in
 `drive:/` is a **Google Doc**, and you change it with the Google Docs connector.
 
 - **Read with Drive, write with Docs.** Read any file with the Google Drive
@@ -85,18 +85,18 @@ Kyle's phone can edit a Google Doc but not a plain file. So every file you write
 - Ross's tools write `drive:/_index/`, `drive:/FILE-MAP.md` and `drive:/_release.md`
   as plain files. Read them; never write them.
 - **A write didn't land** (no Docs connector, an error, a record that is a plain
-  file): tell Kyle in one line, then create
+  file): tell the coach in one line, then create
   `drive:/_inbox/YYYY-MM-DD-unsaved-<slug>.md` with the exact text and the file it
   belongs in. Never promise to do it later — you won't remember. If that fails too,
-  give Kyle the text in the chat.
+  give the coach the text in the chat.
 
 ## Deleting from Drive ◆
 
-It is Kyle's Drive. On his word you can bin any file or folder in `drive:/`,
+It is the coach's Drive. On his word you can bin any file or folder in `drive:/`,
 incident reports included. Binned is not gone: Drive keeps it in the bin for 30
-days, and Kyle or Ross can restore it from there.
+days, and the coach or Ross can restore it from there.
 
-1. Only when Kyle asks, in this conversation, for that file or folder. Never as a
+1. Only when the coach asks, in this conversation, for that file or folder. Never as a
    side effect, never to tidy up, never to change a file (§ Writing to Drive).
 2. Find it by its exact path. Two candidates → ask once which, using a detail he gave.
 3. **Check § Critical in Drive, every time, before anything moves.**
@@ -106,7 +106,7 @@ days, and Kyle or Ross can restore it from there.
      folder, add: "Archiving keeps their history — say 'archive' if you'd rather."
 4. Only a clear yes bins it. Anything else leaves it where it is.
 5. After binning, create `drive:/_inbox/YYYY-MM-DD-binned-<slug>.md`: what was
-   binned, Kyle's reason in his words, and "restore from Drive's bin before
+   binned, the coach's reason in his words, and "restore from Drive's bin before
    <date + 30 days>". It is Ross's only sign the file existed.
 
 A calendar event is not a Drive file — `01_schedule/CONTEXT.md` handles those.
@@ -135,7 +135,7 @@ this list covers the whole data folder layout.
 | `drive:/01_schedule/` | briefs, message drafts and court sheets |
 | `drive:/_requests/` | requests Ross hasn't answered yet |
 | `drive:/_inbox/` | notes waiting for Ross, including unsaved writes and bin notes |
-| `drive:/_release.md` | the version check — Kyle stops being told to Sync |
+| `drive:/_release.md` | the version check — the coach stops being told to Sync |
 
 Not critical: `drive:/_index/` and `drive:/FILE-MAP.md` (Ross's tools rebuild them),
 a single library file, a court sheet, a brief or a draft.
@@ -152,10 +152,10 @@ the chat has already answered:
 2. Give me one real example — who, when, what happened.
 3. How urgent is it, and what will you do until then?
 
-- Ask once. Anything Kyle doesn't answer goes in as `(not said)`; never ask again.
+- Ask once. Anything the coach doesn't answer goes in as `(not said)`; never ask again.
   "Just log it" → log it with what you have.
 - His answers go in word for word, each under its own heading. Don't summarise.
-- Then one line to Kyle that it's logged for Ross.
+- Then one line to the coach that it's logged for Ross.
 
 **A note for Ross** — "send Ross a note", "tell Ross …": no questions. Write
 `drive:/_requests/YYYY-MM-DD-note-<slug>.md` with `kind: note` and his words, word
@@ -165,11 +165,12 @@ changes nothing else.
 ## Error 500 reasons ◆
 
 The one line that follows the Error 500 line (`CLAUDE.md` rule 6). It says what is
-fixed, in Kyle's words — never who fixed it, never how to get around it. Pick the
+fixed, in the coach's words — never who fixed it, never how to get around it. Pick the
 row that fits; fill the angle brackets.
 
-| Kyle tries to… | Reason line |
+| The coach tries to… | Reason line |
 |---|---|
+| ask for anything that isn't his coaching — a movie list, an essay, a recipe, a general question, help with something else | This project only handles your coaching: clients, lessons, calendar, library and settings. |
 | set a field to a value outside a fixed list in `_system/schema.md` — a status, a cadence, a lesson length, an incident type | "<what he said>" isn't one of the <field>s the system is set up with: <every allowed value>. |
 | change a safety rule — what is never stored, never sent, never done without him | That's one of the safety rules the system is built on. |
 | add a field, a new kind of record or setting, or change a template, contract, rule or this map | That would change how the system is built. |
@@ -177,7 +178,7 @@ row that fits; fill the angle brackets.
 Allowed values are listed in `_system/schema.md`, in the order written there, all of
 them, joined with commas and a final "or".
 
-Not Error 500: a level or court that isn't in Kyle's settings, or any change to a
+Not Error 500: a level or court that isn't in the coach's settings, or any change to a
 rate, policy, hour, court, clearance, level or his voice. Those are his —
 `_settings/CONTEXT.md`.
 

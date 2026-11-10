@@ -8,7 +8,8 @@ client's Drive folder through rclone — `setup/onboarding.md` § 3) or `--data 
 |---|---|
 | `validate.py` | What state is the book in? Checks Structure (every contract path resolves; data paths written `drive:/…`; placeholders) and Data (layout, folder marker, the client's settings, record shapes, closed vocabularies, reserved names, release marker). Writes nothing. |
 | `build-indexes.py` | Rebuilds `drive:/_index/` and `drive:/FILE-MAP.md` from the records. Writes only those four files, atomically. |
-| `release.py` | Ships a structure change: clean tree → selftest → validate both roots → bump `version.md` → commit + push → write `drive:/_release.md`. Never touches a record. `--dry-run`, `--rehearsal`. |
+| `scan.py` | The personal-data scan, the same file in every client repo. Its deny list lives in Ross's workspace, never here; `scan-allow.txt` lists this repo's own subject words. |
+| `release.py` | Ships a structure change: scan → clean tree → selftest → validate both roots → bump `version.md` → commit + tag `vX.Y.Z` + push → write `drive:/_release.md`. Never touches a record. `--dry-run`, `--rehearsal`. |
 | `selftest.py` | 75 cases against invented fixtures, including every refusal path of `release.py` in a throwaway git repo. `release.py` won't run if it fails. |
 | `fixtures/` | A fake Drive folder — marked, settings filled, three invented clients. No real person, ever. |
 | `drive.py` | rclone pull / normalise / push, used by the three tools above. |

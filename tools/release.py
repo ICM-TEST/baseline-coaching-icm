@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """release.py — ship a structure change to the client.   Ross only.
 
-    python3 tools/release.py --from-drive kyle: --note "what changed" [--bump minor]
-    python3 tools/release.py --from-drive kyle: --note … --dry-run
+    python3 tools/release.py --from-drive client: --note "what changed" [--bump minor]
+    python3 tools/release.py --from-drive client: --note … --dry-run
     (--data "<local plain-text copy>" in place of --from-drive: selftest only)
 
-In order, stopping at the first failure:
-  1. the git working tree must be clean (commit your edits first)
-  2. selftest.py must pass
-  3. validate.py --for-release must be clean on both roots
-  4. bump workspace/_system/version.md (version, released, one changelog line)
-  5. git commit "Release vX.Y.Z" and push
-  6. write drive:/_release.md — the client's next court sheet then says "tap Sync"
+In order, stopping at the first failure — the same order in every client repo (Ross's
+push checklist):
+  1. personal-data scan (tools/scan.py — the repo is public)
+  2. the git working tree must be clean (commit your edits first)
+  3. selftest.py must pass
+  4. validate.py --for-release must be clean on both roots
+  5. bump workspace/version.md (version, released, one changelog line)
+  6. git commit "Release vX.Y.Z: note", tag vX.Y.Z, push the branch and the tag
+  7. write drive:/_release.md — the client's next court sheet then says "tap Sync"
 
 It writes exactly two files: version.md in the repo and _release.md in the data
 folder. It never reads or writes a client record. `--rehearsal` allows {{FILL}}
@@ -34,10 +36,11 @@ _spec = importlib.util.spec_from_file_location("validate", REPO / "tools" / "val
 validate = importlib.util.module_from_spec(_spec)
 sys.modules.setdefault("validate", validate)
 _spec.loader.exec_module(validate)
+sys.path.insert(0, str(REPO / "tools"))
+import scan as scanner  # noqa: E402  (the same scan in every client repo)
 
 
-class Refused(Exception):
-    pass
+Refused = scanner.Refused
 
 
 class MarkerFailed(Exception):
@@ -75,7 +78,7 @@ def release_marker(new: str, today: str, note: str) -> str:
     return (f"---\nversion: {new}\nreleased: {today}\n---\n\n"
             f"# Release marker\n\nWritten by Ross's release.py. Do not edit.\n\n"
             f"Structure **{new}** is released: {note}\n\n"
-            f"If the project's `workspace/_system/version.md` is older than this, the "
+            f"If the project's `workspace/version.md` is older than this, the "
             f"snapshot is behind — see its § The version check.\n")
 
 
@@ -87,7 +90,7 @@ def write_atomic(path: Path, content: str) -> None:
 
 def release(repo: Path, data: Path, note: str, part: str = "patch", dry_run: bool = False,
             push: bool = True, run_selftest: bool = True, rehearsal: bool = False,
-            today: str | None = None, log=print, pre=(), write_marker=None) -> str:
+            today: str | None = None, log=print, pre=(), write_marker=None, deny=None) -> str:
     """Return the new version. Raises Refused and changes nothing on any failed check.
     `pre`: findings from drive.normalise(); `write_marker(text)`: how _release.md is
     written (default: into `data`; --from-drive uploads it instead)."""
@@ -99,6 +102,12 @@ def release(repo: Path, data: Path, note: str, part: str = "patch", dry_run: boo
         raise Refused("--note is required: one line on what changed")
     if not data.is_dir():
         raise Refused(f"data folder not found: {data}")
+
+    if deny is not None:
+        log("scan for personal data …")
+        problems = scanner.scan(deny, repo)
+        if problems:
+            raise Refused("personal-data scan failed:\n  " + "\n  ".join(problems[:20]))
 
     log("1/6 git tree clean …")
     if git(repo, "status", "--porcelain"):
@@ -122,26 +131,27 @@ def release(repo: Path, data: Path, note: str, part: str = "patch", dry_run: boo
         raise Refused(f"the data folder says {r.released_version} is released, newer than this repo's "
                       f"{current} — git pull first")
     new = bump(current, part)
-    vfile = structure / "_system" / "version.md"
+    vfile = structure / "version.md"
     new_text = stamp_version_md(vfile.read_text(encoding="utf-8"), new, today, note)
     marker = release_marker(new, today, note)
 
     log(f"4/6 version {current} → {new}")
     if dry_run:
-        log(f"    WOULD write workspace/_system/version.md, commit 'Release v{new}'"
+        log(f"    WOULD write workspace/version.md, commit 'Release v{new}'"
             + (", push" if push else "") + ", write drive:/_release.md")
         return new
     vfile.write_text(new_text, encoding="utf-8")
 
     log("5/6 commit" + (" + push" if push else "") + " …")
     try:
-        git(repo, "add", "workspace/_system/version.md")
-        git(repo, "commit", "-q", "-m", f"Release v{new}\n\n{note}")
+        git(repo, "add", "workspace/version.md")
+        git(repo, "commit", "-q", "-m", f"Release v{new}: {note}")
+        git(repo, "tag", "-a", f"v{new}", "-m", f"Release v{new}: {note}")
     except Refused:
-        git(repo, "checkout", "--", "workspace/_system/version.md", check=False)
+        git(repo, "checkout", "--", "workspace/version.md", check=False)
         raise
     if push:
-        git(repo, "push", "-q", "origin", "HEAD")
+        git(repo, "push", "-q", "origin", "HEAD", f"v{new}")
 
     log("6/6 release marker …")
     try:
@@ -160,16 +170,18 @@ def release(repo: Path, data: Path, note: str, part: str = "patch", dry_run: boo
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Release a structure change to the client.")
     src = ap.add_mutually_exclusive_group(required=True)
-    src.add_argument("--from-drive", metavar="REMOTE", help="rclone remote whose root is the data folder, e.g. kyle:")
+    src.add_argument("--from-drive", metavar="REMOTE", help="rclone remote whose root is the data folder, e.g. client:")
     src.add_argument("--data", help="a local plain-text copy of the data folder (selftest)")
     ap.add_argument("--note", required=True, help="one line on what changed — the client may read it")
     ap.add_argument("--bump", choices=["patch", "minor", "major"], default="patch")
     ap.add_argument("--dry-run", action="store_true", help="run every check, change nothing")
     ap.add_argument("--no-push", action="store_true")
     ap.add_argument("--rehearsal", action="store_true", help="allow {{FILL}} placeholders (test projects only)")
+    ap.add_argument("--denylist", help="the private deny list (default: tools/scan.py says where it is looked for)")
     a = ap.parse_args(argv)
     kw = dict(push=not a.no_push, rehearsal=a.rehearsal)
     try:
+        kw["deny"] = scanner.load_denylist(a.denylist)
         if a.from_drive:
             drive = validate.load_drive()
             try:

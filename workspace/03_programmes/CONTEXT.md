@@ -1,12 +1,12 @@
 # 03_programmes — programmes and progress · DORMANT until Phase 3
 
 **Dormant.** This module is switched off in `_system/modules.yml`. An agent does
-none of its work. If Kyle asks for it, that is a request (`CLAUDE.md` rule 5):
+none of its work. If the coach asks for it, that is a request (`CLAUDE.md` rule 5):
 log it, tell him in one line, and do the nearest thing a live module supports.
 
 ## Purpose (when live)
 
-Assigns programme designs from `drive:/library/programmes/` to clients and tracks progression from session notes. Kyle approves every change.
+Assigns programme designs from `drive:/library/programmes/` to clients and tracks progression from session notes. The coach approves every change.
 
 ## Not this?
 

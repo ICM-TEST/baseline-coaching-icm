@@ -7,7 +7,7 @@ currency: ZAR
 
 The only home for what lessons cost and what happens when one doesn't happen.
 Coaching agreements point here; they never restate it. Filled at first-run setup;
-Kyle changes any value by chat.
+The coach changes any value by chat.
 
 ## Rates
 
@@ -21,19 +21,19 @@ Kyle changes any value by chat.
 
 (not set)
 
-## Cancellation and no-shows — in Kyle's exact words
+## Cancellation and no-shows — in the coach's exact words
 
 > (not set)
 
-How the agent applies it — worked out from the policy above, confirmed by Kyle:
+How the agent applies it — worked out from the policy above, confirmed by the coach:
 
 | Situation | Charged? |
 |---|---|
 | Cancelled with at least (not set) hours' notice | (not set) |
 | Cancelled later than that | (not set) |
 | No-show | (not set) |
-| Kyle cancels | no |
+| The coach cancels | no |
 | Rain / court unplayable | (not set) |
 
-When money is involved, the agent states the outcome and Kyle confirms it before
+When money is involved, the agent states the outcome and the coach confirms it before
 anything is logged.

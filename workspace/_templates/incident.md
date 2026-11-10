@@ -10,7 +10,7 @@ written:             # YYYY-MM-DD HH:MM, when this record was made
 ---
 
 <!-- APPEND-ONLY. Never edit above the addenda line. Never archive.
-     Binned only when Kyle asks, after the critical-file warning.
+     Binned only when the coach asks, after the critical-file warning.
      Facts, in order, in plain words. What was seen and heard — not conclusions.
      Exact words in quotes where they matter. -->
 

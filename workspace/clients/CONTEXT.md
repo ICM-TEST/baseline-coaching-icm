@@ -1,7 +1,7 @@
 # clients — the record library
 
 One folder per client: who they are, how to reach the family, what keeps them safe
-on court, and a dated log of everything that happened. Kyle creates, updates and
+on court, and a dated log of everything that happened. The coach creates, updates and
 archives records freely; the agent writes every new one from the template. The
 records live in `drive:/clients/`; this folder holds only the contract.
 
@@ -19,7 +19,7 @@ need to know to keep them safe today" in one read.
 
 ## Inputs
 
-- **Working:** what Kyle says; the client's own folder, `drive:/clients/<slug>/`.
+- **Working:** what the coach says; the client's own folder, `drive:/clients/<slug>/`.
 - **Reference:** `_templates/client/`, `_templates/incident.md`,
   `_templates/agreement.md`, `drive:/_settings/levels.md`, `drive:/_settings/coach.md`
   (court slugs), `_system/schema.md`, `drive:/_index/roster.md`.
@@ -41,11 +41,11 @@ No file inside a record is ever named `CONTEXT.md`, `SKILL.md` or `CLAUDE.md`.
 
 ## Outputs
 
-The record files above, and one-line confirmations to Kyle.
+The record files above, and one-line confirmations to the coach.
 
 ## Process
 
-| Kyle says something like | Workflow in `SKILL.md` |
+| The coach says something like | Workflow in `SKILL.md` |
 |---|---|
 | "New client, Sarah Ndlovu, green ball, Tuesdays 4pm, mum's Lerato" | Create a client |
 | "Ethan's mum's number changed" / "he's on yellow ball now" | Update a record |
@@ -58,5 +58,5 @@ Phone budget: every workflow resolves in four Drive reads or fewer.
 
 ## Human check
 
-Kyle confirms archiving once, and reads an incident report before it is final.
+The coach confirms archiving once, and reads an incident report before it is final.
 Everything else he corrects by chat afterwards.

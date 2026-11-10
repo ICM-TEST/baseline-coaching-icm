@@ -3,9 +3,9 @@ setting: voice
 built-from: (not set)
 ---
 
-# Kyle's voice
+# The coach's voice
 
-How every drafted message should sound, worked out from real messages Kyle has sent
+How every drafted message should sound, worked out from real messages the coach has sent
 parents and players. A draft that doesn't sound like him is a draft he rewrites.
 
 ## The pattern

@@ -1,6 +1,6 @@
 # SKILL — changing a setting
 
-The how-to under `_settings/CONTEXT.md`. Runs only while working on Kyle's settings.
+The how-to under `_settings/CONTEXT.md`. Runs only while working on the coach's settings.
 Every write follows `_system/conventions.md` § Writing to Drive.
 
 ## Change a value
@@ -45,12 +45,12 @@ Clients point to these by slug, so check before anything moves:
 A task needs a value that reads `(not set)` — a cancellation outcome, a court's
 travel time, Saturday availability.
 
-1. Ask Kyle that one thing, in one line, and carry on with his answer.
+1. Ask the coach that one thing, in one line, and carry on with his answer.
 2. Save it as a change (§ Change a value) — the question is the confirm; don't ask
    twice.
 3. He doesn't know → do the task without it, say what you assumed, leave it unset.
 
-## What Kyle can't change here
+## What the coach can't change here
 
 The files themselves, their sections and their columns, and the two fixed lines in
 `voice.md` § Never. Asked for one of those → `CLAUDE.md` rule 6.

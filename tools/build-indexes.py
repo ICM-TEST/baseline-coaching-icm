@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """build-indexes.py — regenerate drive:/_index/ and drive:/FILE-MAP.md   Ross only.
 
-    python3 tools/build-indexes.py --from-drive kyle:   # live from Drive (rclone)
+    python3 tools/build-indexes.py --from-drive client:   # live from Drive (rclone)
     python3 tools/build-indexes.py --data "<local plain-text copy>"
 
 Writes only generated files into the DATA root: _index/roster.md,
@@ -69,7 +69,7 @@ def build_roster(r) -> str:
 
 # ── open items ───────────────────────────────────────────────────────────────
 def build_open_items(r) -> str:
-    out = header("Open items", "What needs Kyle or Ross. Rebuilt from the records every run — "
+    out = header("Open items", "What needs the coach or Ross. Rebuilt from the records every run — "
                  "fix the record and the line disappears.")
     sections = []
 
@@ -199,7 +199,7 @@ def main(argv=None) -> int:
     import argparse
     ap = argparse.ArgumentParser(description="Regenerate the data folder's indexes.")
     src = ap.add_mutually_exclusive_group(required=True)
-    src.add_argument("--from-drive", metavar="REMOTE", help="rclone remote whose root is the data folder, e.g. kyle:")
+    src.add_argument("--from-drive", metavar="REMOTE", help="rclone remote whose root is the data folder, e.g. client:")
     src.add_argument("--data", help="a local plain-text copy of the data folder")
     ap.add_argument("--structure", default=str(validate.STRUCTURE))
     a = ap.parse_args(argv)

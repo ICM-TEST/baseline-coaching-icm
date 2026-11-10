@@ -50,48 +50,48 @@ function load(clients) {
 let n = 0; const ok = (name, f) => { f(); n++; console.log('PASS', name); };
 
 ok('setup: 8 checks + 1 weekly, one "on" email, no flood of old files', () => {
-  const { W, api } = load({ Kyle: 'K' });
-  W.add('K', 'old.md', 'kind: request\n## Kyle asked for\nold', { created: 500 });
+  const { W, api } = load({ the coach: 'K' });
+  W.add('K', 'old.md', 'kind: request\n## The coach asked for\nold', { created: 500 });
   api.setup();
   assert.equal(W.triggers.filter(t => t.fn === 'checkRequests').length, 8);
   assert.deepEqual(W.triggers.filter(t => t.fn === 'checkRequests').map(t => t.hour), [0,3,6,9,12,15,18,21]);
   assert.equal(W.triggers.filter(t => t.fn === 'weeklyCheckIn').length, 1);
-  assert.equal(W.mail.length, 1); assert.match(W.mail[0].s, /alerts are on/); assert.match(W.mail[0].b, /✓ Kyle — 1 file/);
+  assert.equal(W.mail.length, 1); assert.match(W.mail[0].s, /alerts are on/); assert.match(W.mail[0].b, /✓ the coach — 1 file/);
 });
 ok('setup twice: triggers replaced, not doubled', () => {
-  const { W, api } = load({ Kyle: 'K' }); W.add('K', 'a.md', 'x', { created: 1 });
+  const { W, api } = load({ the coach: 'K' }); W.add('K', 'a.md', 'x', { created: 1 });
   api.setup(); api.setup(); assert.equal(W.triggers.length, 9);
 });
 ok('new request → one email with text and link; next check silent', () => {
-  const { W, api } = load({ Kyle: 'K' }); W.add('K', 'old.md', 'x', { created: 1 });
+  const { W, api } = load({ the coach: 'K' }); W.add('K', 'old.md', 'x', { created: 1 });
   api.setup(); W.mail = [];
-  W.clock = 5000; W.add('K', '2026-10-22-gate.md', '---\nkind: request\n---\n## Kyle asked for\nGroup lessons', { created: 4000 });
+  W.clock = 5000; W.add('K', '2026-10-22-gate.md', '---\nkind: request\n---\n## The coach asked for\nGroup lessons', { created: 4000 });
   api.checkRequests();
-  assert.equal(W.mail.length, 1); assert.equal(W.mail[0].s, '1 new from Kyle');
-  assert.match(W.mail[0].b, /Request · Kyle · 2026-10-22-gate\.md/); assert.match(W.mail[0].b, /Group lessons/);
+  assert.equal(W.mail.length, 1); assert.equal(W.mail[0].s, '1 new from the coach');
+  assert.match(W.mail[0].b, /Request · the coach · 2026-10-22-gate\.md/); assert.match(W.mail[0].b, /Group lessons/);
   assert.match(W.mail[0].b, /https:\/\/docs\//);
   W.clock = 9000; api.checkRequests(); assert.equal(W.mail.length, 1);
 });
 ok('note is labelled Note; plain file read too; trashed file ignored', () => {
-  const { W, api } = load({ Kyle: 'K' }); W.add('K', 'o.md', 'x', { created: 1 });
+  const { W, api } = load({ the coach: 'K' }); W.add('K', 'o.md', 'x', { created: 1 });
   api.setup(); W.mail = []; W.clock = 5000;
   W.add('K', 'n.md', '---\nkind: note\n---\n## Note\nGate code changed', { created: 4000, doc: false });
   W.add('K', 'bin.md', 'kind: request', { created: 4000, trashed: true });
   api.checkRequests();
-  assert.equal(W.mail.length, 1); assert.match(W.mail[0].b, /Note · Kyle · n\.md/); assert.match(W.mail[0].b, /Gate code/);
+  assert.equal(W.mail.length, 1); assert.match(W.mail[0].b, /Note · the coach · n\.md/); assert.match(W.mail[0].b, /Gate code/);
   assert.doesNotMatch(W.mail[0].b, /bin\.md/);
 });
 ok('many clients → still one email per check, subject counts each', () => {
-  const { W, api } = load({ Kyle: 'K', 'Car wash': 'C' });
+  const { W, api } = load({ the coach: 'K', 'Car wash': 'C' });
   W.add('K', 'o.md', 'x', { created: 1 }); W.add('C', 'o2.md', 'x', { created: 1 });
   api.setup(); W.mail = []; W.clock = 5000;
   W.add('K', 'a.md', 'kind: request', { created: 4000 }); W.add('K', 'b.md', 'kind: note', { created: 4000 });
   W.add('C', 'c.md', 'kind: request', { created: 4000 });
   api.checkRequests();
-  assert.equal(W.mail.length, 1); assert.equal(W.mail[0].s, '3 new from Kyle (2), Car wash (1)');
+  assert.equal(W.mail.length, 1); assert.equal(W.mail[0].s, '3 new from the coach (2), Car wash (1)');
 });
 ok('lost access: emailed once, not every check; recovers quietly', () => {
-  const { W, api } = load({ Kyle: 'K' }); W.add('K', 'o.md', 'x', { created: 1 });
+  const { W, api } = load({ the coach: 'K' }); W.add('K', 'o.md', 'x', { created: 1 });
   api.setup(); W.mail = []; const saved = W.folders.K; delete W.folders.K;
   api.checkRequests(); api.checkRequests();
   assert.equal(W.mail.length, 1); assert.match(W.mail[0].b, /can't open the folder/);
@@ -99,33 +99,33 @@ ok('lost access: emailed once, not every check; recovers quietly', () => {
   assert.equal(W.props['problem:K'], undefined);
 });
 ok('unfilled folder ID: setup says so once, checks stay silent', () => {
-  const { W, api } = load({ Kyle: 'PASTE_FOLDER_ID_HERE' });
-  api.setup(); assert.equal(W.mail.length, 1); assert.match(W.mail[0].b, /✗ Kyle — no folder ID yet/);
+  const { W, api } = load({ the coach: 'PASTE_FOLDER_ID_HERE' });
+  api.setup(); assert.equal(W.mail.length, 1); assert.match(W.mail[0].b, /✗ the coach — no folder ID yet/);
   api.checkRequests(); assert.equal(W.mail.length, 1);
 });
 ok('client added later: no flood of their old files', () => {
-  const r1 = load({ Kyle: 'K', New: 'N' }); const { W, api } = r1;
+  const r1 = load({ the coach: 'K', New: 'N' }); const { W, api } = r1;
   W.add('K', 'o.md', 'x', { created: 1 }); api.setup(); W.mail = [];
   W.add('N', 'old1.md', 'x', { created: 2 });   // folder appears later, with old files
   W.clock = 6000; api.checkRequests();
   assert.ok(W.mail.every(m => !/old1/.test(m.b)));
 });
 ok('whole data folder shared instead of _requests: looks inside it', () => {
-  const { W, api } = load({ Kyle: 'R' }); W.add('R', 'o.md', 'x', { created: 1, root: true });
+  const { W, api } = load({ the coach: 'R' }); W.add('R', 'o.md', 'x', { created: 1, root: true });
   api.setup(); W.mail = []; W.clock = 5000;
   W.add('R', 'n.md', 'kind: note', { created: 4000 }); api.checkRequests();
-  assert.equal(W.mail.length, 1); assert.match(W.mail[0].b, /Note · Kyle · n\.md/);
+  assert.equal(W.mail.length, 1); assert.match(W.mail[0].b, /Note · the coach · n\.md/);
 });
 ok('a shared folder that is neither: says to share _requests itself', () => {
-  const { W, api } = load({ Kyle: 'X' }); W.folders.X = { requests: null, name: 'Photos' };
+  const { W, api } = load({ the coach: 'X' }); W.folders.X = { requests: null, name: 'Photos' };
   api.setup(); assert.match(W.mail[0].b, /share _requests itself/);
 });
 ok('weekly check-in lists every client', () => {
-  const { W, api } = load({ Kyle: 'K', Other: 'O' }); W.add('K', 'o.md', 'x', { created: 1 });
-  api.weeklyCheckIn(); assert.match(W.mail[0].b, /✓ Kyle — 1 file/); assert.match(W.mail[0].b, /✗ Other — can't open/);
+  const { W, api } = load({ the coach: 'K', Other: 'O' }); W.add('K', 'o.md', 'x', { created: 1 });
+  api.weeklyCheckIn(); assert.match(W.mail[0].b, /✓ the coach — 1 file/); assert.match(W.mail[0].b, /✗ Other — can't open/);
 });
 ok('stopAlerts removes only this script\'s triggers', () => {
-  const { W, api } = load({ Kyle: 'K' }); W.add('K', 'o.md', 'x', { created: 1 });
+  const { W, api } = load({ the coach: 'K' }); W.add('K', 'o.md', 'x', { created: 1 });
   W.triggers.push({ fn: 'somethingElse', getHandlerFunction: () => 'somethingElse' });
   api.setup(); api.stopAlerts(); assert.deepEqual(W.triggers.map(t => t.fn), ['somethingElse']);
 });

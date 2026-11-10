@@ -3,7 +3,7 @@
 Every record's shape and every allowed value. Ross's `validate.py` checks the whole
 data folder against this file. **A value not listed here is an error**, not a new
 option — a new value in a fixed list here is a structure change (`CLAUDE.md`
-rule 6). Levels and courts are the exception: their lists are Kyle's, in
+rule 6). Levels and courts are the exception: their lists are the coach's, in
 `drive:/_settings/`, and he adds to them through `_settings/CONTEXT.md`.
 
 ## Reserved names
@@ -15,12 +15,12 @@ rule 6). Levels and courts are the exception: their lists are Kyle's, in
 
 `{{FILL: question}}` — an answer Ross supplies when he sets up an instance
 (`_system/policies.md`, his setup files). Allowed in the template repo; never in a
-released instance. Kyle's own answers never use it: an unanswered setting in
+released instance. The coach's own answers never use it: an unanswered setting in
 `drive:/_settings/` reads `(not set)`.
 
 ## Folder marker — `drive:/_coaching-workspace.md`
 
-Template: `_templates/coaching-workspace.md`. Exactly one in Kyle's Drive, at the top
+Template: `_templates/coaching-workspace.md`. Exactly one in the coach's Drive, at the top
 of his coaching folder; every chat finds `drive:/` by it. Frontmatter `created:` and
 `structure-version:` (the version at first-run setup).
 
@@ -28,7 +28,7 @@ of his coaching folder; every chat finds `drive:/` by it. Frontmatter `created:`
 
 Exactly four files, each a Doc made from its template in `_templates/settings/`:
 `coach.md`, `rates.md`, `voice.md`, `levels.md`. Frontmatter `setting:` names the
-file. Their sections and columns are fixed by the template; every value is Kyle's.
+file. Their sections and columns are fixed by the template; every value is the coach's.
 A value not given yet reads `(not set)`.
 
 ## Client — `drive:/clients/<slug>/client.md`
@@ -54,7 +54,7 @@ A record folder holds `client.md`, `log.md`, `programme.md` and the folders
 ## Incident — `drive:/clients/<slug>/incidents/YYYY-MM-DD-HHMM.md`
 
 Template: `_templates/incident.md`. **Append-only**: a correction is a dated addendum
-at the bottom, never an edit above it. Never archived; binned only when Kyle asks,
+at the bottom, never an edit above it. Never archived; binned only when the coach asks,
 after the warning in `_system/conventions.md` § Deleting from Drive.
 
 | Field | Allowed |
@@ -114,7 +114,7 @@ date: YYYY-MM-DD
 kind: request       # request · note
 status: open        # open · answered · done · declined
 ---
-## Kyle asked for
+## The coach asked for
 ## Example
 ## How urgent, and meanwhile
 ## What the system did instead
@@ -124,7 +124,7 @@ status: open        # open · answered · done · declined
 A note (`kind: note`, file `YYYY-MM-DD-note-<slug>.md`) has only `## Note` and
 `## Ross's answer`.
 
-Kyle's agent writes every section except `## Ross's answer`, asking first as in
+The coach's agent writes every section except `## Ross's answer`, asking first as in
 `_system/conventions.md` § Requests. Ross writes the answer and the status. An older
 request with `## What he was trying to do` and no `kind:` is still valid; `kind`
 defaults to `request`.
@@ -132,7 +132,7 @@ defaults to `request`.
 ## Release marker — `drive:/_release.md`
 
 Written only by Ross's `release.py`. Frontmatter `version:` and `released:`, then one
-line on what changed. Compared with `_system/version.md` for the version check.
+line on what changed. Compared with `version.md` for the version check.
 
 ## Calendar linkage
 

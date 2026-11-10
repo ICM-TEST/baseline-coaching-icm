@@ -6,12 +6,12 @@ timezone: Africa/Johannesburg
 
 # Coach
 
-Where and when Kyle coaches. Filled at first-run setup; Kyle changes any value by
+Where and when the coach coaches. Filled at first-run setup; the coach changes any value by
 chat. A value still `(not set)` is asked for the first time a task needs it.
 
 ## Availability
 
-The hours clients can book Kyle. Booking never offers a slot outside them.
+The hours clients can book the coach. Booking never offers a slot outside them.
 
 | Day | From | To |
 |---|---|---|
@@ -29,7 +29,7 @@ A client's `court:` must be a slug from this table.
 
 ## Travel time between courts
 
-Minutes, door to door at the times Kyle actually drives. Booking refuses a slot that
+Minutes, door to door at the times the coach actually drives. Booking refuses a slot that
 doesn't leave this gap.
 
 | From → To | Minutes |

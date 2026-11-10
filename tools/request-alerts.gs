@@ -18,7 +18,7 @@
 // One line per client: a name you'll recognise → the ID of the _requests folder
 // they shared with you (in the folder's web address, the part after /folders/).
 const CLIENTS = {
-  'Kyle': 'PASTE_FOLDER_ID_HERE',
+  'the coach': 'PASTE_FOLDER_ID_HERE',
 };
 const CHECK_HOURS = [0, 3, 6, 9, 12, 15, 18, 21];   // every 3 hours
 const WEEKLY_DAY = 'MONDAY';                         // "still working" email

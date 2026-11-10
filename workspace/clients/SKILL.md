@@ -4,21 +4,21 @@ The how-to under `clients/CONTEXT.md`. Runs only while working on client records
 
 ## Finding the client
 
-1. Read `drive:/_index/roster.md`. It is generated and **may lag** behind a client Kyle
+1. Read `drive:/_index/roster.md`. It is generated and **may lag** behind a client the coach
    created today.
 2. Not there → search Drive for a folder titled with the slug inside `drive:/clients/`.
-3. Two possible matches → ask **once**, using a detail Kyle already gave ("Sarah on
+3. Two possible matches → ask **once**, using a detail the coach already gave ("Sarah on
    Tuesdays, or Sarah the adult?"). Never a numbered list.
 
 ## Create a client
 
 1. Slugify the name: `firstname-lastname`, lowercase, hyphens. Check for a collision
-   (above). A collision gets a suffix **Kyle** chooses.
+   (above). A collision gets a suffix **The coach** chooses.
 2. Create `drive:/clients/<slug>/` and create in it, as Docs, from
    `_templates/client/`: `client.md`, `log.md`, `programme.md` (the template text,
    frontmatter filled in steps 3–5). Then create the four empty folders `sessions/`, `agreements/`,
    `incidents/`, `output/`. Nothing else goes in a record folder.
-3. Fill `client.md` frontmatter **only** from what Kyle said. Unknowns stay blank;
+3. Fill `client.md` frontmatter **only** from what the coach said. Unknowns stay blank;
    never guess a phone number, a level or a rate. `status: trial` unless he says
    they're already a regular.
 4. `level:` must be in `drive:/_settings/levels.md`; `court:` must be a slug in
@@ -32,7 +32,7 @@ The how-to under `clients/CONTEXT.md`. Runs only while working on client records
 
 ## Update a record
 
-Change only the field Kyle named — replace its one line. A level or court that
+Change only the field the coach named — replace its one line. A level or court that
 isn't in his settings → offer to add it first, as in Create a client step 4. Add a one-line `log.md` entry for anything a future
 reader would want to know changed (level, guardian, phone, rate). Confirm in one line.
 
@@ -40,12 +40,12 @@ reader would want to know changed (level, guardian, phone, rate). Confirm in one
 
 - **Medical:** write a twelve-word operational extract to `medical:` — the condition,
   where the medication is, who to call. A full history is not stored
-  (`_system/policies.md`). If Kyle has a signed form, `medical-source:` gets the
+  (`_system/policies.md`). If the coach has a signed form, `medical-source:` gets the
   `vault://` pointer; the form itself never goes in Drive.
 - **Media consent:** `yes` or `no` plus `media-consent-date:`. Until it is set,
   `unknown` — and unknown means no filming and no photos.
 - **Collection:** names into `may-collect` or `may-not-collect`. If `may-not-collect`
-  is ever non-empty, add a `log.md` entry saying who told Kyle and when.
+  is ever non-empty, add a `log.md` entry saying who told the coach and when.
 - None of these fields is ever copied into an invite, a brief's client-visible
   section, or a message draft.
 
@@ -55,7 +55,7 @@ Comes **before** any other task in the same message.
 
 1. Write `_templates/incident.md` to `drive:/clients/<slug>/incidents/YYYY-MM-DD-HHMM.md`
    (date and time it happened). One file per child involved.
-2. Fill it from what Kyle said, in his order, in plain words. Facts, not conclusions.
+2. Fill it from what the coach said, in his order, in plain words. Facts, not conclusions.
    Anything he didn't say stays blank — never fill a gap with a likely story.
 3. `written:` is now. Ask **one** question only if `guardian-told` is unknown.
 4. Read it back short: type, severity, who's been told. Ask him to confirm it's
@@ -72,15 +72,15 @@ Drive. A new agreement sets `supersedes:` — the old file is never edited.
 ## Archive / reactivate
 
 - **Archive:** confirm once. Then `status: archived` and a closing `log.md` entry
-  saying why they stopped, in Kyle's words. Never move the folder. Archiving keeps
-  it; if Kyle wants it gone, that is `_system/conventions.md` § Deleting from Drive.
+  saying why they stopped, in the coach's words. Never move the folder. Archiving keeps
+  it; if the coach wants it gone, that is `_system/conventions.md` § Deleting from Drive.
   If they have a recurring series, ask whether to end it — that is `01_schedule`.
 - **Reactivate:** `status: active`, a `log.md` entry, and a three-line read-back from
   the record: where they got to, why they stopped, what to check first.
 
 ## When it doesn't fit
 
-Kyle wants a field, a folder or a kind of record the template doesn't have → that
+The coach wants a field, a folder or a kind of record the template doesn't have → that
 changes the structure: `CLAUDE.md` rule 6 (Error 500, then offer the request). If he
 gave you information along with it, put it in `client.md` under `## Notes` so
 nothing is lost.

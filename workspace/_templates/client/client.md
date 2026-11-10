@@ -17,7 +17,7 @@ guardian:
 guardian-phone:
 guardian-email:
 calendar-attendee:   # who receives the invite — usually the guardian
-# ── Safeguarding · Kyle's eyes only · never in an invite or a message draft ──
+# ── Safeguarding · the coach's eyes only · never in an invite or a message draft ──
 medical:             # operational extract, 12 words max: "asthma — inhaler in his bag"
 medical-source:      # vault:// pointer to the signed intake form, if any
 emergency-contact:   # only if different from the guardian
@@ -31,10 +31,10 @@ may-not-collect: []  # people who must NOT collect the child — surfaced on eve
 # <name>
 
 ## Who they are
-<!-- A few lines in Kyle's words: age, school, temperament, why they play. -->
+<!-- A few lines in the coach's words: age, school, temperament, why they play. -->
 
 ## What they're working towards
-<!-- The goal, and whose goal it is — the player's, the parent's, or Kyle's. -->
+<!-- The goal, and whose goal it is — the player's, the parent's, or the coach's. -->
 
 ## Notes
 <!-- Anything else worth knowing that isn't a dated event. Dated things go in log.md. -->

@@ -8,7 +8,7 @@ from Notion to client records; they were already right.
 
 ## 1. Always ask, never assume
 
-A calendar event puts something in Kyle's real day and, through the invite, in a
+A calendar event puts something in the coach's real day and, through the invite, in a
 family's. It is asked about, never inferred.
 
 - **Ask for the slot. Don't invent one.** "Tuesday" is a day, not a time. "Next week"
@@ -25,7 +25,7 @@ family's. It is asked about, never inferred.
 2. Check the slot against the calendar **and** against `drive:/_settings/coach.md`: inside
    his availability, and the travel time from the previous lesson's court to this one fits.
 3. Conflict, outside his availability, or travel doesn't fit → say which in one line, offer the
-   nearest two slots that work, create nothing. If Kyle still wants it, or the slot
+   nearest two slots that work, create nothing. If the coach still wants it, or the slot
    only fits by pushing other lessons, do § 2a before anything moves.
 4. Read back the slot in plain words — "Ethan, Tue 21 Oct, 16:00, 60 min, Kelvin
    Grove 3?" — and wait for yes.
@@ -43,17 +43,17 @@ family's. It is asked about, never inferred.
 
 ## 2a. Is it worth it?
 
-Kyle's time is the stock: a lesson that costs a drive, or pushes others later, can
+The coach's time is the stock: a lesson that costs a drive, or pushes others later, can
 earn less than it loses. When a booking request only fits by moving other lessons,
-when it would push the day past his availability, or when Kyle asks "should I take
+when it would push the day past his availability, or when the coach asks "should I take
 this?", work it out before he says yes.
 
 1. **Read** that day's calendar (free), then `drive:/_settings/coach.md` (availability,
    courts, travel) and `drive:/_settings/rates.md` (the price of each lesson). A
-   price Kyle gives for a request ("R200 for an hour at SACS") wins over the table.
+   price the coach gives for a request ("R200 for an hour at SACS") wins over the table.
 2. **Lay out the day with the request in it:** each lesson where it can start once
    the drive from the last court is done, inside his availability. Note what moves
-   and what no longer fits — a booked lesson, or another request Kyle mentioned in
+   and what no longer fits — a booked lesson, or another request the coach mentioned in
    this chat.
 3. **Compare** the two days: money in against money lost, and extra driving minutes.
    A price that's `(not set)` → compare by lessons kept, and say so.
@@ -64,15 +64,15 @@ this?", work it out before he says yes.
    Comes out ahead or even → say so in one line and carry on with § 2 step 4.
 
 Never move or decline anything here. Moving a booked lesson is § 4, one client at a
-time, each confirmed; declining is Kyle's message to send (rule 4). Nothing is
-saved: a request Kyle hasn't said yes to lives only in this chat.
+time, each confirmed; declining is the coach's message to send (rule 4). Nothing is
+saved: a request the coach hasn't said yes to lives only in this chat.
 
 ## 3. Recurring series
 
-Translate Kyle's plain words to an `RRULE`. **Never ask Kyle for an RRULE** — plain
+Translate the coach's plain words to an `RRULE`. **Never ask the coach for an RRULE** — plain
 words are his side; the translation is yours.
 
-| Kyle says | You write |
+| The coach says | You write |
 |---|---|
 | every day | `RRULE:FREQ=DAILY` |
 | every second day | `RRULE:FREQ=DAILY;INTERVAL=2` |
@@ -99,26 +99,26 @@ Weekday codes: `MO TU WE TH FR SA SU`.
 ## 4. Reschedule
 
 1. Find the event by the `icm-client:` line, never by title.
-2. **Part of a series and Kyle hasn't said "just this one" or "all of them" → always
+2. **Part of a series and the coach hasn't said "just this one" or "all of them" → always
    ask.** Getting this wrong wipes a term.
 3. Check the new slot as in §2 steps 2–3; read it back; wait for yes.
 4. Move the event. `log.md`: was → now, and why.
 5. Draft the message from `_templates/messages/reschedule.md` into
-   `drive:/01_schedule/messages/YYYY-MM-DD-<slug>.md`. Kyle sends it.
+   `drive:/01_schedule/messages/YYYY-MM-DD-<slug>.md`. The coach sends it.
 6. Changing a whole series' pattern: update `cadence:` / `default-slot:` on the
    record **first**, then regenerate the `RRULE`. If the record and the event
-   disagree, the record wins — fix the event and tell Kyle you did, because he may
+   disagree, the record wins — fix the event and tell the coach you did, because he may
    have changed it in the calendar on purpose.
 
 ## 5. Cancel
 
 1. Find the event; "this one or all of them?" as in §4.
 2. Apply `drive:/_settings/rates.md` to the notice given. State the outcome in one line —
-   "Under 24 hours, so it's charged — right?" — and wait for Kyle's answer whenever
+   "Under 24 hours, so it's charged — right?" — and wait for the coach's answer whenever
    money is involved.
 3. Delete the event (or the one instance). Cancelling the whole series also clears
    `series-event:` on the record — the only time that field is emptied.
-4. `log.md`: what was cancelled, by whom, notice given, the outcome Kyle confirmed.
+4. `log.md`: what was cancelled, by whom, notice given, the outcome the coach confirmed.
 5. **Charged** → write a session-note stub from `_templates/session-note.md` to
    `drive:/clients/<slug>/sessions/YYYY-MM-DD.md` with `attended: cancelled-late` or
    `no-show`, `charged: yes`, and nothing in the body. (Rule 1: money reads notes.)
@@ -129,12 +129,12 @@ Weekday codes: `MO TU WE TH FR SA SU`.
 Run by the scheduled task. For each lesson tomorrow:
 
 1. Phone missing on the record → no draft; add the client to the run's summary as
-   "no number" so Kyle sees it.
-2. Otherwise draft from `_templates/messages/reminder.md` in Kyle's voice
+   "no number" so the coach sees it.
+2. Otherwise draft from `_templates/messages/reminder.md` in the coach's voice
    (`drive:/_settings/voice.md`, read once for the run): day, time, court, and what they'll work on from the
-   client-visible bullets in the event's description. Nothing from "For Kyle only" or "Flags".
+   client-visible bullets in the event's description. Nothing from "For the coach only" or "Flags".
 3. Write to `drive:/01_schedule/messages/YYYY-MM-DD-<slug>.md`.
-4. Tell Kyle in one line: how many drafts are ready, and who has no number.
+4. Tell the coach in one line: how many drafts are ready, and who has no number.
 
 The calendar invite itself is the other reminder channel — Google sends it, free.
 
@@ -144,7 +144,7 @@ Run by the 06:00 task, for each lesson today. **A Phase 1 brief is not its own f
 the morning court sheet (§ 8), so the whole morning is one Doc written once.
 
 1. Read `client.md` and the **last** `log.md` entry. That is all Phase 1 reads.
-2. Work out the brief in the shape of `_templates/brief.md`: the client-visible bullets, the three Kyle-only lines,
+2. Work out the brief in the shape of `_templates/brief.md`: the client-visible bullets, the three coach-only lines,
    the flags. Hold it for § 8. Write nothing to `drive:/01_schedule/briefs/` — that folder is for the full briefs of
    Phase 2.
 3. Copy the client-visible bullets into the event description, **above** the `icm-client:` line. Never change the
@@ -154,7 +154,7 @@ the morning court sheet (§ 8), so the whole morning is one Doc written once.
 ## 8. Morning court sheet — 06:00
 
 Into `drive:/01_schedule/court-sheets/YYYY-MM-DD.md`, created **once**, after every lesson's brief is worked out, with
-the whole text in that one create. The same text is the task's reply to Kyle. Never create it empty and add to it.
+the whole text in that one create. The same text is the task's reply to the coach. Never create it empty and add to it.
 
 - Nothing on today → "Nothing on today." Four words, not an empty report.
 - Otherwise, in order: **three lines per lesson, maximum** —
@@ -163,8 +163,8 @@ the whole text in that one create. The same text is the task's reply to Kyle. Ne
   3. flags: medical extract, `may-not-collect`, "no consent to film" if relevant, owed money once Phase 4 is live
 - Travel: one line between lessons only where the gap is tight.
 - Clearances: one line for anything in `drive:/_settings/coach.md` expiring within 60 days or expired.
-- Version: read `drive:/_release.md`; if it is newer than `_system/version.md`, add the
-  one-line update nudge from `_system/version.md`. Last line of the sheet.
+- Version: read `drive:/_release.md`; if it is newer than `version.md`, add the
+  one-line update nudge from `version.md`. Last line of the sheet.
 
 Drive calls for a morning with *n* lessons: two reads per lesson, `coach.md` and `_release.md` once each, and one
 create. Nothing is read twice — a client with two lessons today is read once.
@@ -173,4 +173,4 @@ create. Nothing is read twice — a client with two lessons today is read once.
 
 Group lessons, a second calendar, a club booking system, a waiting list, blackout
 dates — none exist yet. Write the request (`CLAUDE.md` rule 5) and do the nearest
-single-client booking Kyle agrees to.
+single-client booking the coach agrees to.

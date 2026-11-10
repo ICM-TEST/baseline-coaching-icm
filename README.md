@@ -7,7 +7,7 @@ this template; their **data** lives in their own Google Drive.
 > **No client data ever lives in a repo.** Records, notes and anything about a child
 > exist only in the client's Drive. If you see a real name in a commit, revert it.
 
-Spec: PRD v0.7 and FEATURES v0.3 (Drive: `kyle-coaching-icm/output/`). Where this
+Spec: PRD v0.7 and FEATURES v0.3 (Drive: `the project's output folder, `). Where this
 repo and the PRD disagree, the ICM invariants win — say so and stop.
 
 ## Two roots
@@ -51,12 +51,12 @@ Rollback is `git revert` + another release. Turning a module on is one line in
 - The client's Claude reads a **snapshot**; Sync is manual and desktop-only, so a
   version check nudges them.
 - Tools live in `tools/`, never in what the client sees.
-- The brief is split: a client-visible part for the invite, a Kyle-only part.
+- The brief is split: a client-visible part for the invite, a coach-only part.
 - **Records are Google Docs** (22 Oct 2026, after the phone test). The Drive
   connector can create a file but never edit one; the Docs connector can edit a
   Doc. Ross's tools read the folder through rclone (`tools/drive.py`), exporting
   Docs as text; Drive for Desktop is no longer used.
-- **Kyle's Claude can bin his Drive files** (22 Oct 2026) — anything, incident
+- **The coach's Claude can bin his Drive files** (22 Oct 2026) — anything, incident
   reports included, when he asks and confirms. Critical files get a warning first;
   the list is in `workspace/_system/conventions.md` § Critical in Drive, and
   `validate.py` errors if it stops covering the data layout. Every bin leaves an
@@ -80,4 +80,4 @@ Rollback is `git revert` + another release. Turning a module on is one line in
 answer only Ross can supply for an instance is `{{FILL: …}}` (policies, scheduled
 tasks); a release refuses while any remain. The client's own settings read
 `(not set)` until they answer, and never block a release. Next:
-`setup/onboarding.md` for Kyle.
+`setup/onboarding.md` for the coach.

@@ -1,8 +1,8 @@
 # The workspace — shape, lifecycle, gates
 
-Kyle's coaching practice, run by chatting to Claude. A **record library** (the unit is
+The coaching practice, run by chatting to Claude. A **record library** (the unit is
 a client) inside an **umbrella** (a shared factory plus numbered operating modules),
-split across two roots: **Structure** (this repo, read-only) and **Data** (Kyle's
+split across two roots: **Structure** (this repo, read-only) and **Data** (The coach's
 Drive folder).
 
 ## Not this?
@@ -13,7 +13,7 @@ To route a specific task, use `CLAUDE.md`. For names and allowed values, use
 ## Goal
 
 Every lesson is booked once and reminded once, nobody is missed or double-booked, and
-anything Kyle knows about a player is written where the next brief will find it.
+anything the coach knows about a player is written where the next brief will find it.
 
 ## Shape
 
@@ -23,23 +23,23 @@ anything Kyle knows about a player is written where the next brief will find it.
 | Engine | `_system/` | Ross |
 | Types — the stamps | `_templates/` | Ross |
 | Settings — the shapes | `_templates/settings/`, `_settings/` | Ross |
-| Settings — the values | `drive:/_settings/` | Kyle, through the agent |
-| Instances | `drive:/clients/<slug>/` | Kyle, through the agent |
-| Knowledge | `drive:/library/` | Kyle |
-| Module output | `drive:/01_schedule/` | the agent; Kyle reads and sends |
-| Change control | `drive:/_requests/` | Kyle writes, Ross answers in the file |
-| Unrouted capture | `drive:/_inbox/` | Kyle |
+| Settings — the values | `drive:/_settings/` | The coach, through the agent |
+| Instances | `drive:/clients/<slug>/` | The coach, through the agent |
+| Knowledge | `drive:/library/` | The coach |
+| Module output | `drive:/01_schedule/` | the agent; the coach reads and sends |
+| Change control | `drive:/_requests/` | The coach writes, Ross answers in the file |
+| Unrouted capture | `drive:/_inbox/` | The coach |
 | Generated | `drive:/_index/`, `drive:/FILE-MAP.md` | Ross's scripts only |
 | Release marker | `drive:/_release.md` | Ross's `release.py` only |
 
 The test for any file: does changing it change what the system **does** (Structure,
-Ross's), or only what it **knows** (Data, Kyle's)? Settings are the one split: what
-can be set is Structure; what it is set to is Kyle's.
+Ross's), or only what it **knows** (Data, the coach's)? Settings are the one split: what
+can be set is Structure; what it is set to is the coach's.
 
 ## Data folder
 
 ```
-drive:/                Kyle's coaching folder — any name; found by _coaching-workspace.md
+drive:/                the coaching folder — any name; found by _coaching-workspace.md
 ├─ _coaching-workspace.md   the marker
 ├─ _settings/          coach.md · rates.md · voice.md · levels.md
 ├─ clients/<slug>/     client.md · log.md · programme.md · sessions/ · agreements/ · incidents/ · output/
@@ -70,13 +70,13 @@ line; an agent never does that module's work.
 ## A client's life
 
 `trial → active ⇄ paused → dormant → archived`, all as a `status:` change in
-`client.md`. The folder never moves; it is binned only when Kyle asks
+`client.md`. The folder never moves; it is binned only when the coach asks
 (`_system/conventions.md` § Deleting from Drive). Coming back is a flip back
 to `active`.
 
 ## Human gates
 
-| Moment | Kyle must |
+| Moment | The coach must |
 |---|---|
 | Any calendar write — create, move, cancel | confirm the slot or pattern in plain words |
 | A cancellation that involves money | confirm the policy outcome |
